@@ -1,36 +1,110 @@
 :root {
-  --bg-cream: #fbf9f5;
+  --bg-cream: #f8fafc;
   --bg-card: #ffffff;
-  --bg-card-hover: #faf6f0;
-  --bg-soft-gold: #f7f2e7;
-  --bg-champagne: #f4ece1;
+  --bg-card-hover: #f1f5f9;
+  --bg-soft-primary: #eff6ff;
+  --bg-champagne: #e0f2fe;
   
-  --border-gold: rgba(212, 175, 55, 0.35);
-  --border-gold-strong: #d4af37;
-  --border-glow: rgba(212, 175, 55, 0.25);
+  --border-primary: rgba(59, 130, 246, 0.35);
+  --border-glow: rgba(59, 130, 246, 0.25);
   
-  --text-main: #2c2523;
-  --text-secondary: #5f524f;
-  --text-muted: #8c7b77;
+  --text-main: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
 
-  --color-gold-primary: #c59b27;
-  --color-gold-hover: #b0871b;
-  --color-gold-light: rgba(212, 175, 55, 0.12);
-  
-  --color-amber: #d97706;
-  --color-bronze: #8c6d3f;
-  --color-green: #10b981;
-  --color-purple: #8b5cf6;
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-light: rgba(59, 130, 246, 0.12);
+  --color-secondary: #0284c7;
 
   --font-sans: 'Inter', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --shadow-sm: 0 4px 15px rgba(140, 109, 63, 0.06);
-  --shadow-card: 0 12px 35px rgba(120, 90, 45, 0.08);
-  --shadow-hover: 0 20px 40px rgba(197, 155, 39, 0.2);
+  --shadow-sm: 0 4px 15px rgba(59, 130, 246, 0.06);
+  --shadow-card: 0 12px 35px rgba(30, 41, 59, 0.08);
+  --shadow-hover: 0 20px 40px rgba(59, 130, 246, 0.2);
   
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.95);
+  --glass-bg: rgba(255, 255, 255, 0.92);
+}
+
+/* 🌊 1. 冰川藍 (Glacier Blue & Slate Minimalist) */
+body.theme-blue {
+  --bg-cream: #f8fafc;
+  --bg-card-hover: #f1f5f9;
+  --bg-soft-primary: #eff6ff;
+  --border-primary: rgba(59, 130, 246, 0.35);
+  --text-main: #1e293b;
+  --text-secondary: #475569;
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-light: rgba(59, 130, 246, 0.12);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(224, 242, 254, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(239, 246, 255, 0.7) 0%, transparent 50%);
+}
+
+/* 🍵 2. 靜謐抹茶 (Sage Matcha & Warm Linen) */
+body.theme-sage {
+  --bg-cream: #f7f9f6;
+  --bg-card-hover: #eef3ec;
+  --bg-soft-primary: #ecfdf5;
+  --border-primary: rgba(16, 185, 129, 0.35);
+  --text-main: #1c3328;
+  --text-secondary: #436354;
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --color-primary-light: rgba(16, 185, 129, 0.12);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(209, 250, 229, 0.5) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(236, 253, 245, 0.6) 0%, transparent 50%);
+}
+
+/* 🍇 3. 煙燻紫 (Smoky Lavender & Oat Cream) */
+body.theme-lavender {
+  --bg-cream: #faf8fc;
+  --bg-card-hover: #f3edf7;
+  --bg-soft-primary: #f5f3ff;
+  --border-primary: rgba(139, 92, 246, 0.35);
+  --text-main: #2e1065;
+  --text-secondary: #5b21b6;
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #7c3aed;
+  --color-primary-light: rgba(139, 92, 246, 0.12);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(237, 233, 254, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(245, 243, 255, 0.7) 0%, transparent 50%);
+}
+
+/* 🍑 4. 暖陽蜜桃 (Warm Peach & Soft Coral) */
+body.theme-coral {
+  --bg-cream: #fffbf7;
+  --bg-card-hover: #fff3ec;
+  --bg-soft-primary: #fff7ed;
+  --border-primary: rgba(249, 115, 22, 0.35);
+  --text-main: #431407;
+  --text-secondary: #7c2d12;
+  --color-primary: #ea580c;
+  --color-primary-hover: #c2410c;
+  --color-primary-light: rgba(249, 115, 22, 0.12);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(255, 237, 213, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(255, 247, 237, 0.7) 0%, transparent 50%);
+}
+
+/* 🏜️ 5. 亞麻大地 (Champagne Sand & Morandi) */
+body.theme-sand {
+  --bg-cream: #fdfbf7;
+  --bg-card-hover: #f5f0eb;
+  --bg-soft-primary: #f7f2e7;
+  --border-primary: rgba(168, 130, 80, 0.35);
+  --text-main: #36291a;
+  --text-secondary: #634d34;
+  --color-primary: #a88250;
+  --color-primary-hover: #8c6a3b;
+  --color-primary-light: rgba(168, 130, 80, 0.12);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(247, 242, 231, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(245, 240, 235, 0.7) 0%, transparent 50%);
 }
 
 * {
@@ -42,27 +116,22 @@
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-cream);
-  /* SC-ICG Ambient Gold & Champagne Radial Glow */
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(244, 236, 225, 0.6) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(247, 242, 231, 0.7) 0%, transparent 50%),
-    radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease;
 }
 
 .mono {
   font-family: var(--font-mono);
 }
 
-/* SC-ICG Unisex Premium Glass Card */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid var(--border-gold);
+  border: 1.5px solid var(--border-primary);
   border-radius: 24px;
   box-shadow: var(--shadow-card);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -71,12 +140,11 @@ body {
 .glass-panel-hover:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(197, 155, 39, 0.6);
+  border-color: var(--color-primary);
 }
 
-/* Headline Gradient */
 .gradient-text {
-  background: linear-gradient(135deg, #2c2523 30%, #c59b27 100%);
+  background: linear-gradient(135deg, var(--text-main) 30%, var(--color-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -96,24 +164,24 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #c59b27, #b0871b);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   color: #ffffff;
-  box-shadow: 0 8px 25px rgba(197, 155, 39, 0.35);
+  box-shadow: 0 8px 25px var(--border-primary);
 }
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(197, 155, 39, 0.5);
+  box-shadow: 0 12px 30px var(--border-primary);
 }
 
 .btn-secondary {
   background: #ffffff;
   color: var(--text-main);
-  border: 1.5px solid var(--border-gold);
+  border: 1.5px solid var(--border-primary);
   box-shadow: var(--shadow-sm);
 }
 .btn-secondary:hover {
-  background: var(--bg-soft-gold);
-  border-color: var(--color-gold-primary);
+  background: var(--bg-soft-primary);
+  border-color: var(--color-primary);
   transform: translateY(-2px);
 }
 
@@ -126,21 +194,16 @@ body {
   font-weight: 700;
   border-radius: 999px;
 }
-.badge-gold {
-  background: var(--bg-soft-gold);
-  color: var(--color-gold-primary);
-  border: 1px solid rgba(197, 155, 39, 0.35);
-}
-.badge-bronze {
-  background: var(--bg-champagne);
-  color: var(--color-bronze);
-  border: 1px solid rgba(140, 109, 63, 0.25);
+.badge-primary {
+  background: var(--bg-soft-primary);
+  color: var(--color-primary);
+  border: 1px solid var(--border-primary);
 }
 
 .input-field {
   width: 100%;
   background: #ffffff;
-  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border: 1.5px solid var(--border-primary);
   border-radius: 14px;
   padding: 12px 16px;
   color: var(--text-main);
@@ -150,15 +213,14 @@ body {
   transition: all 0.25s ease;
 }
 .input-field:focus {
-  border-color: var(--color-gold-primary);
-  box-shadow: 0 0 0 4px var(--color-gold-light);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-primary-light);
 }
 
-/* Animations */
 @keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.4); }
-  70% { box-shadow: 0 0 0 12px rgba(197, 155, 39, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0); }
+  0% { box-shadow: 0 0 0 0 var(--border-primary); }
+  70% { box-shadow: 0 0 0 12px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
 }
 
 .pulse-glow {
