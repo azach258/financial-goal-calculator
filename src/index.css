@@ -1,35 +1,35 @@
 :root {
-  --bg-cream: #fdfbf7;
+  --bg-cream: #fbf9f5;
   --bg-card: #ffffff;
-  --bg-card-hover: #fff9fb;
-  --bg-soft-pink: #fff0f3;
-  --bg-lavender: #f8f0fc;
+  --bg-card-hover: #faf6f0;
+  --bg-soft-gold: #f7f2e7;
+  --bg-champagne: #f4ece1;
   
-  --border-pink: rgba(255, 182, 193, 0.45);
-  --border-pink-strong: #ff758c;
-  --border-glow: rgba(255, 117, 140, 0.35);
+  --border-gold: rgba(212, 175, 55, 0.35);
+  --border-gold-strong: #d4af37;
+  --border-glow: rgba(212, 175, 55, 0.25);
   
-  --text-main: #3d2c2e;
-  --text-secondary: #735e61;
-  --text-muted: #9c878a;
+  --text-main: #2c2523;
+  --text-secondary: #5f524f;
+  --text-muted: #8c7b77;
 
-  --color-pink-primary: #ff758c;
-  --color-pink-hover: #ff4d6d;
-  --color-pink-light: rgba(255, 117, 140, 0.12);
+  --color-gold-primary: #c59b27;
+  --color-gold-hover: #b0871b;
+  --color-gold-light: rgba(212, 175, 55, 0.12);
   
-  --color-peach: #ff9a8b;
-  --color-gold: #f7b731;
-  --color-purple: #9b59b6;
-  --color-green: #27ae60;
+  --color-amber: #d97706;
+  --color-bronze: #8c6d3f;
+  --color-green: #10b981;
+  --color-purple: #8b5cf6;
 
   --font-sans: 'Inter', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --shadow-sm: 0 4px 15px rgba(255, 117, 140, 0.06);
-  --shadow-card: 0 12px 35px rgba(160, 110, 120, 0.08);
-  --shadow-hover: 0 20px 40px rgba(255, 117, 140, 0.22);
+  --shadow-sm: 0 4px 15px rgba(140, 109, 63, 0.06);
+  --shadow-card: 0 12px 35px rgba(120, 90, 45, 0.08);
+  --shadow-hover: 0 20px 40px rgba(197, 155, 39, 0.2);
   
-  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg: rgba(255, 255, 255, 0.9);
   --glass-border: rgba(255, 255, 255, 0.95);
 }
 
@@ -42,11 +42,11 @@
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-cream);
-  /* SC-ICG Ambient Radial Glow Layers */
+  /* SC-ICG Ambient Gold & Champagne Radial Glow */
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(255, 209, 220, 0.45) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(248, 240, 252, 0.6) 0%, transparent 50%),
-    radial-gradient(circle at 50% 35%, rgba(255, 240, 243, 0.3) 0%, transparent 60%);
+    radial-gradient(circle at 15% 15%, rgba(244, 236, 225, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(247, 242, 231, 0.7) 0%, transparent 50%),
+    radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
@@ -57,12 +57,12 @@ body {
   font-family: var(--font-mono);
 }
 
-/* SC-ICG Agency Style Card with Hover Elevation */
+/* SC-ICG Unisex Premium Glass Card */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid var(--border-pink);
+  border: 1.5px solid var(--border-gold);
   border-radius: 24px;
   box-shadow: var(--shadow-card);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -71,18 +71,12 @@ body {
 .glass-panel-hover:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(255, 117, 140, 0.6);
+  border-color: rgba(197, 155, 39, 0.6);
 }
 
-/* Big Punchy Headline Gradient */
+/* Headline Gradient */
 .gradient-text {
-  background: linear-gradient(135deg, #3d2c2e 20%, #ff758c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gradient-pink-text {
-  background: linear-gradient(135deg, #ff758c 0%, #ff4d6d 100%);
+  background: linear-gradient(135deg, #2c2523 30%, #c59b27 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -102,24 +96,24 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ff758c, #ff4d6d);
+  background: linear-gradient(135deg, #c59b27, #b0871b);
   color: #ffffff;
-  box-shadow: 0 8px 25px rgba(255, 117, 140, 0.38);
+  box-shadow: 0 8px 25px rgba(197, 155, 39, 0.35);
 }
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(255, 117, 140, 0.55);
+  box-shadow: 0 12px 30px rgba(197, 155, 39, 0.5);
 }
 
 .btn-secondary {
   background: #ffffff;
   color: var(--text-main);
-  border: 1.5px solid var(--border-pink);
+  border: 1.5px solid var(--border-gold);
   box-shadow: var(--shadow-sm);
 }
 .btn-secondary:hover {
-  background: var(--bg-soft-pink);
-  border-color: var(--color-pink-primary);
+  background: var(--bg-soft-gold);
+  border-color: var(--color-gold-primary);
   transform: translateY(-2px);
 }
 
@@ -132,21 +126,21 @@ body {
   font-weight: 700;
   border-radius: 999px;
 }
-.badge-pink {
-  background: var(--bg-soft-pink);
-  color: var(--color-pink-primary);
-  border: 1px solid rgba(255, 117, 140, 0.35);
+.badge-gold {
+  background: var(--bg-soft-gold);
+  color: var(--color-gold-primary);
+  border: 1px solid rgba(197, 155, 39, 0.35);
 }
-.badge-purple {
-  background: var(--bg-lavender);
-  color: #8e44ad;
-  border: 1px solid rgba(142, 68, 173, 0.25);
+.badge-bronze {
+  background: var(--bg-champagne);
+  color: var(--color-bronze);
+  border: 1px solid rgba(140, 109, 63, 0.25);
 }
 
 .input-field {
   width: 100%;
   background: #ffffff;
-  border: 1.5px solid rgba(255, 182, 193, 0.5);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
   border-radius: 14px;
   padding: 12px 16px;
   color: var(--text-main);
@@ -156,15 +150,15 @@ body {
   transition: all 0.25s ease;
 }
 .input-field:focus {
-  border-color: var(--color-pink-primary);
-  box-shadow: 0 0 0 4px var(--color-pink-light);
+  border-color: var(--color-gold-primary);
+  box-shadow: 0 0 0 4px var(--color-gold-light);
 }
 
 /* Animations */
 @keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.4); }
-  70% { box-shadow: 0 0 0 12px rgba(255, 117, 140, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(197, 155, 39, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0); }
 }
 
 .pulse-glow {
@@ -172,9 +166,9 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(3deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
 }
 .animate-float {
   animation: float 4.5s ease-in-out infinite;
