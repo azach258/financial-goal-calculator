@@ -19,7 +19,8 @@ import {
   Baby,
   Heart,
   Calendar,
-  HelpCircle
+  PiggyBank,
+  Key
 } from 'lucide-react';
 
 export default function App() {
@@ -45,14 +46,13 @@ export default function App() {
     familyMembers: 2,
     occupation: '專業高階主管 / 創作者',
     monthlyIncome: 80000,
-    monthlyBonusAndInvestment: 20000, // 含副業/獎金/投資收益
+    monthlyBonusAndInvestment: 20000,
     monthlyExpense: 45000,
     targetRetireAge: 55,
     desiredRetireMonthlyExpense: 55000,
-    selectedGoals: ['1', '3', '4']
+    selectedGoals: ['1', '2', '4']
   });
 
-  // Calculate precise age
   const calculateAge = (dobStr) => {
     if (!dobStr) return 30;
     const dob = new Date(dobStr);
@@ -109,14 +109,15 @@ export default function App() {
     email: '',
     lineId: '',
     preferredTime: '平日晚上 (19:00 - 21:00)',
+    consultTopic: '🏡 聰明買房成家與房貸減壓',
     note: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Enhanced Goal Options including Home Buying & Parenting
+  // Core Goal Options featuring Smart Home Buying & Child Growth Account
   const goalOptions = [
-    { id: '1', icon: '🏡', title: '買房置產', desc: '打造一個專屬自己的溫馨城堡，安心紮根築夢' },
-    { id: '2', icon: '👶', title: '育兒準備', desc: '期待擁有自己的可愛寶寶，給孩子充裕溫暖的成長環境' },
+    { id: '1', icon: '🏡', title: '聰明買房成家', desc: '透過首購頭期評估與房貸輕鬆減壓，擁有屬於自己的專屬城堡' },
+    { id: '2', icon: '👶', title: '專屬育兒帳戶', desc: '提早為孩子打造獨立教育與成長基金，輕鬆給寶寶充裕資源' },
     { id: '3', icon: '☕', title: '自由人生', desc: '擁有不必為生活屈就的底氣，享有隨心掌控時間與生活的自由' },
     { id: '4', icon: '🏖️', title: '提早退休', desc: '打造每月被動收入水龍頭，早日解鎖想走就走的自由人生' },
     { id: '5', icon: '💎', title: '圓夢基金', desc: '穩健積累第一筆百萬自由基金，讓理想生活不再遙不可及' },
@@ -230,7 +231,7 @@ export default function App() {
               理想生活目標計算機
             </div>
             <div style={{ fontSize: '0.78rem', color: 'var(--color-primary)', fontWeight: '700' }}>
-              SC-ICG 頂級視覺 ‧ 全客群自由藍圖
+              SC-ICG 頂級視覺 ‧ 聰明買房 ‧ 專屬育兒帳戶 ‧ 自由藍圖
             </div>
           </div>
         </div>
@@ -291,7 +292,7 @@ export default function App() {
           </h1>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.02rem', maxWidth: '720px', margin: '0 auto 28px auto', lineHeight: '1.6' }}>
-            透過 SC-ICG 頂級視覺 3 步驟盤點，算算你離「買房打造溫馨的家、育兒準備、被動收入與自由旅行」還有多少距離。
+            透過 SC-ICG 頂級視覺 3 步驟盤點，算算你離「聰明買房成家、專屬育兒帳戶、被動收入與自由旅行」還有多少距離。
           </p>
 
           {/* Social Proof Indicator */}
@@ -309,7 +310,7 @@ export default function App() {
             marginBottom: '28px'
           }}>
             <Users size={16} color="var(--color-primary)" />
-            <span>已有 <strong style={{ color: 'var(--color-primary)' }}>3,580+</strong> 位使用者完成試算 ｜ 99.6% 高滿意推薦</span>
+            <span>已有 <strong style={{ color: 'var(--color-primary)' }}>3,620+</strong> 位家庭與創作者完成試算 ｜ 99.6% 高滿意推薦</span>
           </div>
 
           <div>
@@ -318,7 +319,7 @@ export default function App() {
               style={{ padding: '16px 38px', fontSize: '1.1rem', fontWeight: '800' }}
               onClick={() => setIsConsultModalOpen(true)}
             >
-              <Sparkles size={20} /> 免費預約 1對1 專屬理財靈感對談
+              <Sparkles size={20} /> 免費預約 1對1 聰明買房/育兒與理財靈感對談
             </button>
           </div>
 
@@ -399,7 +400,7 @@ export default function App() {
                   ✨ 理想生活畫面引導：
                 </h3>
                 <p style={{ fontSize: '0.92rem', color: 'var(--text-main)', lineHeight: '1.6' }}>
-                  想像一下 5 ~ 10 年後的某個陽光午後，你過著怎樣的生活？是喝著咖啡處理熱愛的事業、在自己佈置的溫馨小宅裡陪著可愛寶寶，還是帶著家人隨心安排旅遊？把心放鬆，讓我們一起算算出實現夢想的具體藍圖。
+                  想像一下 5 ~ 10 年後的某個陽光午後，你過著怎樣的生活？是在自己佈置的溫馨小宅裡陪著可愛寶寶成長、聰明規劃房貸輕鬆無負擔，還是帶著家人隨心安排旅遊？把心放鬆，讓我們一起算算出實現夢想的具體藍圖。
                 </p>
               </div>
             </div>
@@ -451,7 +452,6 @@ export default function App() {
                 />
               </div>
 
-              {/* Side Income / Bonus / Investment Income Clarification */}
               <div>
                 <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   月平均副業 / 獎金 / 投資被動收益 (元) ✨
@@ -504,7 +504,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Goal Options including Home Buying & Parenting */}
+            {/* Goal Options highlighting Smart Home Buying & Child Account */}
             <div style={{ marginTop: '28px' }}>
               <h3 style={{ fontSize: '1.15rem', fontWeight: '900', marginBottom: '16px', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 🌟 選擇最讓你怦然心動的理想目標（至多選 3 項）
@@ -615,7 +615,7 @@ export default function App() {
 
                 <div style={{ marginTop: '16px' }}>
                   <label style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
-                    🏠 夢想城堡備註 / 期望地點 (選填)
+                    🏠 聰明買房城堡備註 / 期望地點 (選填)
                   </label>
                   <input
                     type="text"
@@ -631,7 +631,7 @@ export default function App() {
               <div style={{ backgroundColor: '#ffffff', padding: '26px', borderRadius: '22px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', borderBottom: '1.5px dashed var(--border-primary)', paddingBottom: '12px' }}>
                   <h3 style={{ fontSize: '1.15rem', fontWeight: '900', color: 'var(--text-main)' }}>
-                    💳 負債項目與減壓 (Liabilities)
+                    💳 負債項目與輕鬆減壓 (Liabilities)
                   </h3>
                   <span className="mono" style={{ fontWeight: '900', color: 'var(--text-main)', fontSize: '1.3rem' }}>
                     合計: {totalLiabilitiesWan} 萬元
@@ -661,7 +661,7 @@ export default function App() {
 
                 <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1.5px dashed var(--border-primary)' }}>
                   <h4 style={{ fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '10px', fontWeight: '800' }}>
-                    📝 房貸 / 信貸減壓諮詢備註 (幫助顧問評估降息方案)
+                    📝 聰明買房 / 房貸轉貸減壓備註 (幫助顧問評估降息方案)
                   </h4>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                     <div>
@@ -790,7 +790,7 @@ export default function App() {
                       <div>
                         <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>還差一點點！尚有 ${retireFundGapWan.toFixed(0)} 萬元的夢想距離</div>
                         <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: '1.5' }}>
-                          只要適度優化資產配置（如提升高股息 ETF 比例），或每月再多投入約 <span style={{ color: 'var(--color-primary)', fontWeight: '900' }}>${((retireFundGapWan * 10000) / (yearsToRetire * 12)).toFixed(0)} 元</span>，就能加速實現理想生活！
+                          只要適度優化資產配置（如聰明買房房貸減壓、獨立育兒帳戶複利），或每月再多投入約 <span style={{ color: 'var(--color-primary)', fontWeight: '900' }}>${((retireFundGapWan * 10000) / (yearsToRetire * 12)).toFixed(0)} 元</span>，就能加速實現理想生活！
                         </div>
                       </div>
                     </div>
@@ -799,37 +799,37 @@ export default function App() {
               </div>
             </div>
 
-            {/* Advisory Points */}
+            {/* Advisory Points highlighting Smart Home Buying & Child Account */}
             <div className="glass-panel" style={{ padding: '32px' }}>
               <h3 style={{ fontSize: '1.2rem', fontWeight: '900', marginBottom: '20px', color: 'var(--text-main)' }}>
-                🌟 給你的 3 個專屬質感理財調優建議
+                🌟 給你的 3 大專屬理財調優策略（包含「聰明買房」與「育兒帳戶」）
               </h3>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '20px' }}>
                 <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)' }}>
-                    1. 打造自動化「被動收入水龍頭」
+                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Key size={18} /> 1. 聰明買房與房貸輕鬆減壓
                   </div>
                   <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
-                    將閒置的低收益定存轉為每月派息的台股 ETF 組合，讓被動收入幫你支付日常花費與旅行預算。
+                    精算最佳頭期款比例與銀行優質房貸轉貸方案，讓每月房貸輕鬆負擔，省下的利息轉為置產夢想基金。
                   </div>
                 </div>
 
                 <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)' }}>
-                    2. 房貸負債降息與輕鬆減壓
+                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <PiggyBank size={18} /> 2. 獨立「專屬育兒複利帳戶」
                   </div>
                   <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
-                    透過跨行轉貸試算與利息節省，每月多省下 $3,000 ~ $8,000 元，轉為圓夢基金。
+                    從寶寶出生即設立獨立成長與教育專用戶頭，善用時間複利滾動，輕鬆給孩子充足的學習與愛。
                   </div>
                 </div>
 
                 <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)' }}>
-                    3. 優雅保障與自主圓夢
+                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Coffee size={18} /> 3. 被動收入水龍頭與退休防護
                   </div>
                   <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
-                    盤點保單保障，確保自己在大展宏圖衝刺事業時，後防線穩如泰山。
+                    將閒置資產配置於每月配息的優質 ETF 組合，確保家庭生活隨心，風險來臨時依然穩如泰山。
                   </div>
                 </div>
               </div>
@@ -850,10 +850,10 @@ export default function App() {
               }}>
                 <div>
                   <div style={{ fontSize: '1.35rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <Sparkles size={22} /> 專屬禮遇：免費領取「1對1 專屬理財靈感對談」 (價值 $3,000)
+                    <Sparkles size={22} /> 專屬禮遇：免費預約「聰明買房 / 育兒帳戶 / 1對1靈感對談」 (價值 $3,000)
                   </div>
                   <div style={{ fontSize: '0.92rem', opacity: 0.95, marginTop: '8px' }}>
-                    由專業溫暖的理財顧問親自為你做資產優化、房貸減壓與夢想藍圖規劃。
+                    由專業溫暖的理財顧問親自為你做頭期款試算、育兒戶頭複利規劃與房貸減壓。
                   </div>
                 </div>
 
@@ -862,7 +862,7 @@ export default function App() {
                     <Printer size={18} /> 保存報告
                   </button>
                   <button className="btn pulse-glow" style={{ backgroundColor: '#ffffff', color: 'var(--color-primary)', fontWeight: '900', padding: '14px 30px' }} onClick={() => setIsConsultModalOpen(true)}>
-                    <Send size={20} /> 預約靈感對談
+                    <Send size={20} /> 預約專屬諮詢
                   </button>
                 </div>
               </div>
@@ -881,7 +881,7 @@ export default function App() {
 
       {/* Footer */}
       <footer style={{ maxWidth: '1040px', margin: '48px auto 20px auto', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-        ✨ 理想生活目標計算機 | 獻給追求質感、自由與美好人生的你 ✨
+        ✨ 理想生活目標計算機 | 聰明買房 ‧ 育兒帳戶 ‧ 獻給追求質感與自由的你 ✨
       </footer>
 
       {/* Consultation Modal */}
@@ -994,6 +994,23 @@ export default function App() {
                     />
                   </div>
 
+                  {/* Priority Advisory Topic Selector */}
+                  <div>
+                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                      最想優先了解的專屬主題 *
+                    </label>
+                    <select
+                      className="input-field"
+                      value={consultForm.consultTopic}
+                      onChange={e => setConsultForm({ ...consultForm, consultTopic: e.target.value })}
+                    >
+                      <option value="🏡 聰明買房成家與房貸減壓">🏡 聰明買房成家與房貸輕鬆減壓</option>
+                      <option value="👶 專屬育兒帳戶與教育基金">👶 專屬育兒帳戶與成長複利基金</option>
+                      <option value="☕ 提早退休與被動收入水龍頭">☕ 提早退休與被動收入水龍頭</option>
+                      <option value="🛡️ 家庭全方位資產與保險盤點">🛡️ 家庭全方位資產與保險盤點</option>
+                    </select>
+                  </div>
+
                   <div>
                     <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                       方便諮詢的時段
@@ -1011,12 +1028,12 @@ export default function App() {
 
                   <div>
                     <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                      你目前最想實現的夢想 (選填)
+                      你目前最想了解的細節 (選填)
                     </label>
                     <textarea
                       className="input-field"
                       rows={3}
-                      placeholder="例如：想了解如何規劃擁有一間自己的採光質感宅..."
+                      placeholder="例如：想了解如何規劃首購頭期款與設立寶寶的育兒複利帳戶..."
                       value={consultForm.note}
                       onChange={e => setConsultForm({ ...consultForm, note: e.target.value })}
                     />
@@ -1046,7 +1063,7 @@ export default function App() {
                   預約成功！✨
                 </h3>
                 <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', marginTop: '10px', lineHeight: '1.6' }}>
-                  我們已收到你的理想生活報告與諮詢需求，理財顧問將在 24 小時內親自與你聯繫！
+                  我們已收到你的理想生活報告與「{consultForm.consultTopic}」諮詢需求，理財顧問將在 24 小時內親自與你聯繫！
                 </p>
 
                 <button
