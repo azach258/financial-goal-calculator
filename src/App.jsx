@@ -15,7 +15,11 @@ import {
   Compass,
   Users,
   Target,
-  Palette
+  Palette,
+  Baby,
+  Heart,
+  Calendar,
+  HelpCircle
 } from 'lucide-react';
 
 export default function App() {
@@ -37,16 +41,32 @@ export default function App() {
 
   // Step 1: Basic Info & Goals
   const [basicInfo, setBasicInfo] = useState({
-    birthYear: 1992,
+    birthDate: '1995-06-15', // 西元年/月/日
     familyMembers: 2,
     occupation: '專業高階主管 / 創作者',
     monthlyIncome: 80000,
-    monthlyBonus: 20000,
+    monthlyBonusAndInvestment: 20000, // 含副業/獎金/投資收益
     monthlyExpense: 45000,
     targetRetireAge: 55,
     desiredRetireMonthlyExpense: 55000,
-    selectedGoals: ['1', '2', '3']
+    selectedGoals: ['1', '3', '4']
   });
+
+  // Calculate precise age
+  const calculateAge = (dobStr) => {
+    if (!dobStr) return 30;
+    const dob = new Date(dobStr);
+    const now = new Date();
+    let age = now.getFullYear() - dob.getFullYear();
+    const m = now.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) {
+      age--;
+    }
+    return isNaN(age) || age <= 0 ? 30 : age;
+  };
+
+  const currentAge = calculateAge(basicInfo.birthDate);
+  const yearsToRetire = Math.max(1, basicInfo.targetRetireAge - currentAge);
 
   // Step 2: Assets & Liabilities Sheet (in 萬元)
   const [assets, setAssets] = useState({
@@ -93,20 +113,19 @@ export default function App() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Enhanced Goal Options including Home Buying & Parenting
   const goalOptions = [
-    { id: '1', icon: '☕', title: '自由人生', desc: '擁有不必為生活屈就的底氣，享有隨心掌控時間與生活的自由' },
-    { id: '2', icon: '🏖️', title: '提早退休', desc: '打造每月被動收入水龍頭，早日解鎖想走就走的自由人生' },
-    { id: '3', icon: '🏡', title: '夢想置產', desc: '擁有一間採光極佳、舒適溫馨、屬於自己的專屬城堡' },
-    { id: '4', icon: '💎', title: '圓夢基金', desc: '穩健積累第一筆百萬自由基金，讓理想生活不再遙不可及' },
-    { id: '5', icon: '🛡️', title: '風險防護', desc: '遇到風險休養時也能保持生活品質，讓家庭後防穩如泰山' },
+    { id: '1', icon: '🏡', title: '買房置產', desc: '打造一個專屬自己的溫馨城堡，安心紮根築夢' },
+    { id: '2', icon: '👶', title: '育兒準備', desc: '期待擁有自己的可愛寶寶，給孩子充裕溫暖的成長環境' },
+    { id: '3', icon: '☕', title: '自由人生', desc: '擁有不必為生活屈就的底氣，享有隨心掌控時間與生活的自由' },
+    { id: '4', icon: '🏖️', title: '提早退休', desc: '打造每月被動收入水龍頭，早日解鎖想走就走的自由人生' },
+    { id: '5', icon: '💎', title: '圓夢基金', desc: '穩健積累第一筆百萬自由基金，讓理想生活不再遙不可及' },
     { id: '6', icon: '🎓', title: '自我投資', desc: '保留專屬學習預算，持續投資自我成長與多元技能' },
     { id: '7', icon: '✈️', title: '環遊世界', desc: '每年安排高質感的深度跨國旅遊，記錄美好風景' },
+    { id: '8', icon: '🛡️', title: '風險防護', desc: '遇到風險休養時也能保持生活品質，讓家庭後防穩如泰山' },
   ];
 
-  const currentAge = new Date().getFullYear() - basicInfo.birthYear;
-  const yearsToRetire = Math.max(1, basicInfo.targetRetireAge - currentAge);
-
-  const totalMonthlyIncome = Number(basicInfo.monthlyIncome || 0) + Number(basicInfo.monthlyBonus || 0);
+  const totalMonthlyIncome = Number(basicInfo.monthlyIncome || 0) + Number(basicInfo.monthlyBonusAndInvestment || 0);
   const monthlySavings = totalMonthlyIncome - Number(basicInfo.monthlyExpense || 0);
   const annualSavingsWan = (monthlySavings * 12) / 10000;
 
@@ -219,7 +238,7 @@ export default function App() {
         {/* Dynamic Theme Color Selector */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: 'var(--bg-soft-primary)', padding: '6px 14px', borderRadius: '999px', border: '1px solid var(--border-primary)' }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <Palette size={14} /> 主題切換：
+            <Palette size={14} /> 風格主題：
           </span>
           <div style={{ display: 'flex', gap: '8px' }}>
             {themes.map(t => (
@@ -272,7 +291,7 @@ export default function App() {
           </h1>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.02rem', maxWidth: '720px', margin: '0 auto 28px auto', lineHeight: '1.6' }}>
-            透過 SC-ICG 頂級視覺 3 步驟盤點，算算你離「被動收入、夢想置產與自由旅行」還有多少距離。
+            透過 SC-ICG 頂級視覺 3 步驟盤點，算算你離「買房打造溫馨的家、育兒準備、被動收入與自由旅行」還有多少距離。
           </p>
 
           {/* Social Proof Indicator */}
@@ -290,7 +309,7 @@ export default function App() {
             marginBottom: '28px'
           }}>
             <Users size={16} color="var(--color-primary)" />
-            <span>已有 <strong style={{ color: 'var(--color-primary)' }}>3,520+</strong> 位使用者完成試算 ｜ 99.6% 高滿意推薦</span>
+            <span>已有 <strong style={{ color: 'var(--color-primary)' }}>3,580+</strong> 位使用者完成試算 ｜ 99.6% 高滿意推薦</span>
           </div>
 
           <div>
@@ -362,24 +381,48 @@ export default function App() {
         {/* STEP 1: Basic Info & Goals */}
         {step === 1 && (
           <div className="glass-panel" style={{ padding: '38px 32px' }}>
+            
+            {/* Guided Inspiration Banner */}
+            <div style={{
+              backgroundColor: 'var(--bg-soft-primary)',
+              border: '1.5px solid var(--border-primary)',
+              borderRadius: '18px',
+              padding: '20px 24px',
+              marginBottom: '28px',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '14px'
+            }}>
+              <Sparkles size={24} color="var(--color-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <div>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-primary)', marginBottom: '4px' }}>
+                  ✨ 理想生活畫面引導：
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--text-main)', lineHeight: '1.6' }}>
+                  想像一下 5 ~ 10 年後的某個陽光午後，你過著怎樣的生活？是喝著咖啡處理熱愛的事業、在自己佈置的溫馨小宅裡陪著可愛寶寶，還是帶著家人隨心安排旅遊？把心放鬆，讓我們一起算算出實現夢想的具體藍圖。
+                </p>
+              </div>
+            </div>
+
             <h2 style={{ fontSize: '1.45rem', fontWeight: '900', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--color-primary)' }}>
-              <Target size={24} color="var(--color-primary)" /> 步驟 1：關於你的現在與理想生活的模樣
+              <Target size={24} color="var(--color-primary)" /> 步驟 1：關於你的背景與心動目標
             </h2>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '20px', marginBottom: '32px' }}>
+              
+              {/* DOB Format YYYY/MM/DD */}
               <div>
                 <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  出生年份 (西元) ✨
+                  出生年月日 (西元年/月/日) * ✨
                 </label>
                 <input
-                  type="number"
+                  type="date"
                   className="input-field"
-                  value={basicInfo.birthYear}
-                  onChange={e => setBasicInfo({ ...basicInfo, birthYear: Number(e.target.value) })}
-                  placeholder="例如 1992"
+                  value={basicInfo.birthDate}
+                  onChange={e => setBasicInfo({ ...basicInfo, birthDate: e.target.value })}
                 />
                 <span style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px', display: 'block', fontWeight: '600' }}>
-                  今年正值黃金大展宏圖的 {currentAge} 歲 ✨
+                  精算今年約為 {currentAge} 歲 ✨
                 </span>
               </div>
 
@@ -398,7 +441,7 @@ export default function App() {
 
               <div>
                 <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  常態月收入 (元) 💰
+                  常態月本薪收入 (元) 💰
                 </label>
                 <input
                   type="number"
@@ -408,16 +451,20 @@ export default function App() {
                 />
               </div>
 
+              {/* Side Income / Bonus / Investment Income Clarification */}
               <div>
                 <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  副業 / 平均獎金 (元) ✨
+                  月平均副業 / 獎金 / 投資被動收益 (元) ✨
                 </label>
                 <input
                   type="number"
                   className="input-field"
-                  value={basicInfo.monthlyBonus}
-                  onChange={e => setBasicInfo({ ...basicInfo, monthlyBonus: Number(e.target.value) })}
+                  value={basicInfo.monthlyBonusAndInvestment}
+                  onChange={e => setBasicInfo({ ...basicInfo, monthlyBonusAndInvestment: Number(e.target.value) })}
                 />
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                  💡 包含副業接案、年終分攤至每月、股息與投資被動收益。
+                </span>
               </div>
 
               <div>
@@ -446,7 +493,7 @@ export default function App() {
 
               <div>
                 <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  自由生活後的每月預算 (元) 💖
+                  自由生活後的每月心動預算 (元) 💖
                 </label>
                 <input
                   type="number"
@@ -457,7 +504,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Goal Options */}
+            {/* Goal Options including Home Buying & Parenting */}
             <div style={{ marginTop: '28px' }}>
               <h3 style={{ fontSize: '1.15rem', fontWeight: '900', marginBottom: '16px', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 🌟 選擇最讓你怦然心動的理想目標（至多選 3 項）
