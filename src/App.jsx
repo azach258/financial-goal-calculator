@@ -42,7 +42,7 @@ export default function App() {
 
   // Step 1: Basic Info & Goals
   const [basicInfo, setBasicInfo] = useState({
-    birthDate: '1995-06-15', // 西元年/月/日
+    birthDate: '1995-06-15',
     familyMembers: 2,
     occupation: '專業高階主管 / 創作者',
     monthlyIncome: 80000,
@@ -114,7 +114,6 @@ export default function App() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Core Goal Options featuring Smart Home Buying & Child Growth Account
   const goalOptions = [
     { id: '1', icon: '🏡', title: '聰明買房成家', desc: '透過首購頭期評估與房貸輕鬆減壓，擁有屬於自己的專屬城堡' },
     { id: '2', icon: '👶', title: '專屬育兒帳戶', desc: '提早為孩子打造獨立教育與成長基金，輕鬆給寶寶充裕資源' },
@@ -191,69 +190,69 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', padding: '24px 16px 60px 16px' }}>
+    <div style={{ minHeight: '100vh', padding: '20px 12px 60px 12px' }}>
       
-      {/* SC-ICG Floating Header with Theme Selector */}
-      <header style={{
+      {/* SC-ICG Floating Responsive Header */}
+      <header className="header-container" style={{
         maxWidth: '1040px',
-        margin: '0 auto 32px auto',
+        margin: '0 auto 24px auto',
         display: 'flex',
         justify: 'space-between',
         alignItems: 'center',
-        padding: '14px 28px',
+        padding: '14px 24px',
         borderRadius: '999px',
         backgroundColor: 'rgba(255, 255, 255, 0.94)',
         backdropFilter: 'blur(16px)',
         border: '1.5px solid var(--border-primary)',
         boxShadow: '0 10px 30px rgba(30, 41, 59, 0.08)',
         position: 'sticky',
-        top: '16px',
+        top: '12px',
         zIndex: 100,
-        flexWrap: 'wrap',
         gap: '12px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div className="header-logo-row" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
-            width: '42px',
-            height: '42px',
+            width: '40px',
+            height: '40px',
             borderRadius: '50%',
             background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-hover))',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: '#fff',
-            boxShadow: '0 6px 16px var(--border-primary)'
+            boxShadow: '0 6px 16px var(--border-primary)',
+            flexShrink: 0
           }}>
             <Compass size={22} />
           </div>
           <div>
-            <div style={{ fontWeight: '900', fontSize: '1.2rem', color: 'var(--text-main)', letterSpacing: '0.3px' }}>
+            <div style={{ fontWeight: '900', fontSize: '1.15rem', color: 'var(--text-main)', letterSpacing: '0.3px', lineHeight: '1.2' }}>
               理想生活目標計算機
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--color-primary)', fontWeight: '700' }}>
-              SC-ICG 頂級視覺 ‧ 聰明買房 ‧ 專屬育兒帳戶 ‧ 自由藍圖
+            <div style={{ fontSize: '0.75rem', color: 'var(--color-primary)', fontWeight: '700' }}>
+              SC-ICG 頂級視覺 ‧ 聰明買房 ‧ 育兒帳戶
             </div>
           </div>
         </div>
 
         {/* Dynamic Theme Color Selector */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: 'var(--bg-soft-primary)', padding: '6px 14px', borderRadius: '999px', border: '1px solid var(--border-primary)' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <Palette size={14} /> 風格主題：
+        <div className="header-theme-selector" style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--bg-soft-primary)', padding: '6px 12px', borderRadius: '999px', border: '1px solid var(--border-primary)' }}>
+          <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <Palette size={14} /> 主題：
           </span>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '6px' }}>
             {themes.map(t => (
               <button
                 key={t.id}
                 title={t.name}
                 onClick={() => setCurrentTheme(t.id)}
                 style={{
-                  width: '20px',
-                  height: '20px',
+                  width: '18px',
+                  height: '18px',
                   borderRadius: '50%',
                   backgroundColor: t.color,
-                  border: currentTheme === t.id ? '2.5px solid #ffffff' : 'none',
-                  boxShadow: currentTheme === t.id ? '0 0 0 2px var(--color-primary)' : '0 2px 5px rgba(0,0,0,0.15)',
+                  border: currentTheme === t.id ? '2px solid #ffffff' : 'none',
+                  boxShadow: currentTheme === t.id ? '0 0 0 2px var(--color-primary)' : '0 2px 4px rgba(0,0,0,0.15)',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   transform: currentTheme === t.id ? 'scale(1.2)' : 'scale(1)'
@@ -267,31 +266,31 @@ export default function App() {
       {/* Main Container */}
       <main style={{ maxWidth: '1040px', margin: '0 auto' }}>
         
-        {/* SC-ICG Agency Hero Banner */}
-        <div className="glass-panel" style={{
-          padding: '48px 36px',
-          marginBottom: '36px',
+        {/* SC-ICG Agency Responsive Hero Banner */}
+        <div className="glass-panel hero-panel" style={{
+          padding: '40px 28px',
+          marginBottom: '28px',
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.98), var(--bg-soft-primary))',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden'
         }}>
-          <span className="badge badge-primary" style={{ padding: '8px 18px', fontSize: '0.88rem', marginBottom: '16px', fontWeight: '800' }}>
+          <span className="badge badge-primary" style={{ padding: '6px 16px', fontSize: '0.82rem', marginBottom: '14px', fontWeight: '800' }}>
             💌 獻給追求自由與高質感生活的你
           </span>
 
-          {/* Big Punchy Headline */}
-          <h1 style={{ 
-            fontSize: '2.4rem', 
+          {/* Big Punchy Responsive Title */}
+          <h1 className="hero-title gradient-text" style={{ 
+            fontSize: '2.2rem', 
             fontWeight: '900', 
             lineHeight: '1.3',
-            margin: '12px 0 16px 0',
+            margin: '10px 0 14px 0',
             letterSpacing: '-0.5px'
-          }} className="gradient-text">
+          }}>
             遇見未來怦然心動的自己：理想生活與自由資金試算
           </h1>
 
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.02rem', maxWidth: '720px', margin: '0 auto 28px auto', lineHeight: '1.6' }}>
+          <p className="hero-subtitle" style={{ color: 'var(--text-secondary)', fontSize: '0.98rem', maxWidth: '720px', margin: '0 auto 24px auto', lineHeight: '1.6' }}>
             透過 SC-ICG 頂級視覺 3 步驟盤點，算算你離「聰明買房成家、專屬育兒帳戶、被動收入與自由旅行」還有多少距離。
           </p>
 
@@ -299,68 +298,69 @@ export default function App() {
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '12px',
-            padding: '10px 22px',
+            gap: '8px',
+            padding: '8px 18px',
             borderRadius: '999px',
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
             border: '1px solid var(--border-primary)',
-            fontSize: '0.88rem',
+            fontSize: '0.82rem',
             color: 'var(--text-main)',
             fontWeight: '700',
-            marginBottom: '28px'
+            marginBottom: '24px',
+            maxWidth: '100%'
           }}>
-            <Users size={16} color="var(--color-primary)" />
-            <span>已有 <strong style={{ color: 'var(--color-primary)' }}>3,620+</strong> 位家庭與創作者完成試算 ｜ 99.6% 高滿意推薦</span>
+            <Users size={15} color="var(--color-primary)" style={{ flexShrink: 0 }} />
+            <span>已有 <strong style={{ color: 'var(--color-primary)' }}>3,620+</strong> 位家庭與創作者完成試算</span>
           </div>
 
           <div>
             <button 
               className="btn btn-primary pulse-glow" 
-              style={{ padding: '16px 38px', fontSize: '1.1rem', fontWeight: '800' }}
+              style={{ padding: '15px 32px', fontSize: '1.05rem', fontWeight: '800' }}
               onClick={() => setIsConsultModalOpen(true)}
             >
-              <Sparkles size={20} /> 免費預約 1對1 聰明買房/育兒與理財靈感對談
+              <Sparkles size={18} /> 免費預約 1對1 聰明買房/育兒與理財靈感對談
             </button>
           </div>
 
-          {/* SC-ICG Progress Step Switcher */}
-          <div style={{
+          {/* Responsive Progress Step Switcher */}
+          <div className="step-switcher-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '16px',
-            marginTop: '40px',
-            paddingTop: '24px',
+            gap: '12px',
+            marginTop: '32px',
+            paddingTop: '20px',
             borderTop: '1.5px dashed var(--border-primary)'
           }}>
             {[
-              { num: 1, title: '描繪心動目標', icon: Target },
-              { num: 2, title: '幸福資產盤點', icon: Coffee },
-              { num: 3, title: '夢想藍圖與缺口', icon: Sparkles }
+              { num: 1, title: '1. 描繪心動目標', icon: Target },
+              { num: 2, title: '2. 幸福資產盤點', icon: Coffee },
+              { num: 3, title: '3. 夢想藍圖與缺口', icon: Sparkles }
             ].map(s => {
               const isActive = step === s.num;
               const isDone = step > s.num;
               return (
                 <button
                   key={s.num}
+                  className="step-btn"
                   onClick={() => setStep(s.num)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '12px',
-                    padding: '14px',
-                    borderRadius: '18px',
+                    gap: '8px',
+                    padding: '12px',
+                    borderRadius: '16px',
                     border: isActive ? '2px solid var(--color-primary)' : '1.5px solid var(--border-primary)',
                     backgroundColor: isActive ? 'var(--bg-soft-primary)' : isDone ? 'var(--bg-soft-primary)' : '#ffffff',
                     color: isActive ? 'var(--color-primary)' : isDone ? 'var(--color-primary)' : 'var(--text-secondary)',
                     cursor: 'pointer',
-                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                    boxShadow: isActive ? '0 8px 20px var(--border-primary)' : 'none'
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
                 >
                   <div style={{
-                    width: '28px',
-                    height: '28px',
+                    width: '24px',
+                    height: '24px',
                     borderRadius: '50%',
                     backgroundColor: isActive ? 'var(--color-primary)' : isDone ? 'var(--color-primary)' : 'var(--bg-card-hover)',
                     color: '#fff',
@@ -368,11 +368,12 @@ export default function App() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 'bold',
-                    fontSize: '0.9rem'
+                    fontSize: '0.8rem',
+                    flexShrink: 0
                   }}>
                     {isDone ? '✓' : s.num}
                   </div>
-                  <span style={{ fontSize: '0.95rem', fontWeight: '800' }}>{s.title}</span>
+                  <span style={{ fontSize: '0.9rem', fontWeight: '800' }}>{s.title}</span>
                 </button>
               );
             })}
@@ -381,39 +382,38 @@ export default function App() {
 
         {/* STEP 1: Basic Info & Goals */}
         {step === 1 && (
-          <div className="glass-panel" style={{ padding: '38px 32px' }}>
+          <div className="glass-panel section-panel" style={{ padding: '32px 24px' }}>
             
             {/* Guided Inspiration Banner */}
             <div style={{
               backgroundColor: 'var(--bg-soft-primary)',
               border: '1.5px solid var(--border-primary)',
-              borderRadius: '18px',
-              padding: '20px 24px',
-              marginBottom: '28px',
+              borderRadius: '16px',
+              padding: '16px 20px',
+              marginBottom: '24px',
               display: 'flex',
               alignItems: 'flex-start',
-              gap: '14px'
+              gap: '12px'
             }}>
-              <Sparkles size={24} color="var(--color-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <Sparkles size={22} color="var(--color-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-primary)', marginBottom: '4px' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--color-primary)', marginBottom: '4px' }}>
                   ✨ 理想生活畫面引導：
                 </h3>
-                <p style={{ fontSize: '0.92rem', color: 'var(--text-main)', lineHeight: '1.6' }}>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-main)', lineHeight: '1.55' }}>
                   想像一下 5 ~ 10 年後的某個陽光午後，你過著怎樣的生活？是在自己佈置的溫馨小宅裡陪著可愛寶寶成長、聰明規劃房貸輕鬆無負擔，還是帶著家人隨心安排旅遊？把心放鬆，讓我們一起算算出實現夢想的具體藍圖。
                 </p>
               </div>
             </div>
 
-            <h2 style={{ fontSize: '1.45rem', fontWeight: '900', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--color-primary)' }}>
-              <Target size={24} color="var(--color-primary)" /> 步驟 1：關於你的背景與心動目標
+            <h2 style={{ fontSize: '1.3rem', fontWeight: '900', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-primary)' }}>
+              <Target size={22} color="var(--color-primary)" /> 步驟 1：關於你的背景與心動目標
             </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '20px', marginBottom: '32px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '28px' }}>
               
-              {/* DOB Format YYYY/MM/DD */}
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   出生年月日 (西元年/月/日) * ✨
                 </label>
                 <input
@@ -422,13 +422,13 @@ export default function App() {
                   value={basicInfo.birthDate}
                   onChange={e => setBasicInfo({ ...basicInfo, birthDate: e.target.value })}
                 />
-                <span style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px', display: 'block', fontWeight: '600' }}>
+                <span style={{ fontSize: '0.78rem', color: 'var(--color-primary)', marginTop: '4px', display: 'block', fontWeight: '600' }}>
                   精算今年約為 {currentAge} 歲 ✨
                 </span>
               </div>
 
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   目前職業 / 專業領域
                 </label>
                 <input
@@ -436,12 +436,12 @@ export default function App() {
                   className="input-field"
                   value={basicInfo.occupation}
                   onChange={e => setBasicInfo({ ...basicInfo, occupation: e.target.value })}
-                  placeholder="例如：科技高階主管、設計師、創作者"
+                  placeholder="例如：科技高階主管、設計師"
                 />
               </div>
 
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   常態月本薪收入 (元) 💰
                 </label>
                 <input
@@ -453,8 +453,8 @@ export default function App() {
               </div>
 
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
-                  月平均副業 / 獎金 / 投資被動收益 (元) ✨
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                  月副業 / 獎金 / 投資收益 (元) ✨
                 </label>
                 <input
                   type="number"
@@ -462,13 +462,13 @@ export default function App() {
                   value={basicInfo.monthlyBonusAndInvestment}
                   onChange={e => setBasicInfo({ ...basicInfo, monthlyBonusAndInvestment: Number(e.target.value) })}
                 />
-                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
-                  💡 包含副業接案、年終分攤至每月、股息與投資被動收益。
+                <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                  💡 包含副業接案、年終與股息收益。
                 </span>
               </div>
 
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   每月必要生活花費 (元) ☕
                 </label>
                 <input
@@ -480,7 +480,7 @@ export default function App() {
               </div>
 
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   期望開啟自由生活的年齡 (歲) 🏖️
                 </label>
                 <input
@@ -492,7 +492,7 @@ export default function App() {
               </div>
 
               <div>
-                <label style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
                   自由生活後的每月心動預算 (元) 💖
                 </label>
                 <input
@@ -504,12 +504,12 @@ export default function App() {
               </div>
             </div>
 
-            {/* Goal Options highlighting Smart Home Buying & Child Account */}
-            <div style={{ marginTop: '28px' }}>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: '900', marginBottom: '16px', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* Responsive Goal Options */}
+            <div style={{ marginTop: '24px' }}>
+              <h3 style={{ fontSize: '1.08rem', fontWeight: '900', marginBottom: '14px', color: 'var(--text-main)' }}>
                 🌟 選擇最讓你怦然心動的理想目標（至多選 3 項）
               </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: '16px' }}>
+              <div className="goals-card-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '14px' }}>
                 {goalOptions.map(g => {
                   const isSelected = basicInfo.selectedGoals.includes(g.id);
                   return (
@@ -518,19 +518,19 @@ export default function App() {
                       onClick={() => toggleGoal(g.id)}
                       className="glass-panel-hover"
                       style={{
-                        padding: '18px',
-                        borderRadius: '20px',
+                        padding: '16px',
+                        borderRadius: '18px',
                         border: isSelected ? '2px solid var(--color-primary)' : '1.5px solid var(--border-primary)',
                         backgroundColor: isSelected ? 'var(--bg-soft-primary)' : '#ffffff',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'flex-start',
-                        gap: '14px'
+                        gap: '12px'
                       }}
                     >
                       <div style={{
-                        width: '24px',
-                        height: '24px',
+                        width: '22px',
+                        height: '22px',
                         borderRadius: '50%',
                         border: isSelected ? 'none' : '1.5px solid var(--text-muted)',
                         backgroundColor: isSelected ? 'var(--color-primary)' : 'transparent',
@@ -538,17 +538,17 @@ export default function App() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         color: '#fff',
-                        fontSize: '0.8rem',
+                        fontSize: '0.75rem',
                         marginTop: '2px',
                         flexShrink: 0
                       }}>
                         {isSelected && '✓'}
                       </div>
                       <div>
-                        <div style={{ fontWeight: '800', fontSize: '1rem', color: isSelected ? 'var(--color-primary)' : 'var(--text-main)' }}>
+                        <div style={{ fontWeight: '800', fontSize: '0.96rem', color: isSelected ? 'var(--color-primary)' : 'var(--text-main)' }}>
                           {g.icon} {g.title}
                         </div>
-                        <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: '1.45' }}>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: '1.4' }}>
                           {g.desc}
                         </div>
                       </div>
@@ -558,7 +558,7 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '36px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '28px' }}>
               <button className="btn btn-primary" onClick={() => setStep(2)}>
                 下一步：資產與負債盤點 <ArrowRight size={18} />
               </button>
@@ -568,39 +568,39 @@ export default function App() {
 
         {/* STEP 2: Assets & Liabilities Sheet */}
         {step === 2 && (
-          <div className="glass-panel" style={{ padding: '38px 32px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-              <h2 style={{ fontSize: '1.45rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--color-primary)' }}>
-                <Coffee size={24} /> 步驟 2：幸福資產與負債盤點 (單位：萬元)
+          <div className="glass-panel section-panel" style={{ padding: '32px 24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <h2 style={{ fontSize: '1.3rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-primary)' }}>
+                <Coffee size={22} /> 步驟 2：幸福資產與負債盤點 (單位：萬元)
               </h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))', gap: '28px' }}>
+            <div className="step2-columns-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
               
               {/* Assets Column */}
-              <div style={{ backgroundColor: '#ffffff', padding: '26px', borderRadius: '22px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', borderBottom: '1.5px dashed var(--border-primary)', paddingBottom: '12px' }}>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: '900', color: 'var(--color-primary)' }}>
+              <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '18px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1.5px dashed var(--border-primary)', paddingBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: '900', color: 'var(--color-primary)' }}>
                     💎 幸福資產積累 (Assets)
                   </h3>
-                  <span className="mono" style={{ fontWeight: '900', color: 'var(--color-primary)', fontSize: '1.3rem' }}>
-                    合計: {totalAssetsWan} 萬元
+                  <span className="mono" style={{ fontWeight: '900', color: 'var(--color-primary)', fontSize: '1.15rem' }}>
+                    合計: {totalAssetsWan} 萬
                   </span>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="step2-input-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   {[
-                    { key: 'cash', label: '💰 現金與活期存款' },
-                    { key: 'deposit', label: '🏦 定期存款 / 數位帳戶' },
+                    { key: 'cash', label: '💰 現金與活存款' },
+                    { key: 'deposit', label: '🏦 定存 / 數位帳戶' },
                     { key: 'stocksShort', label: '📈 台股 / 美股波段' },
-                    { key: 'stocksLong', label: '📊 長期 ETF (如 0050/00878)' },
-                    { key: 'funds', label: '💹 穩健基金與債券' },
-                    { key: 'insuranceValue', label: '🛡️ 儲蓄險與保單價值' },
-                    { key: 'foreignCurrency', label: '💱 外幣儲蓄 (美金/日幣)' },
+                    { key: 'stocksLong', label: '📊 長期 ETF 組合' },
+                    { key: 'funds', label: '💹 穩健基金/債券' },
+                    { key: 'insuranceValue', label: '🛡️ 儲蓄險/保單價值' },
+                    { key: 'foreignCurrency', label: '💱 外幣儲蓄' },
                     { key: 'realEstateValue', label: '🏠 夢想房產估值' },
                   ].map(item => (
                     <div key={item.key}>
-                      <label style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
+                      <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
                         {item.label}
                       </label>
                       <input
@@ -613,8 +613,8 @@ export default function App() {
                   ))}
                 </div>
 
-                <div style={{ marginTop: '16px' }}>
-                  <label style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
+                <div style={{ marginTop: '14px' }}>
+                  <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
                     🏠 聰明買房城堡備註 / 期望地點 (選填)
                   </label>
                   <input
@@ -622,23 +622,23 @@ export default function App() {
                     className="input-field"
                     value={assets.realEstateAddress}
                     onChange={e => setAssets({ ...assets, realEstateAddress: e.target.value })}
-                    placeholder="例如：台北採光質感宅、新竹科技園區置產"
+                    placeholder="例如：台北採光宅、新竹買房置產"
                   />
                 </div>
               </div>
 
               {/* Liabilities Column */}
-              <div style={{ backgroundColor: '#ffffff', padding: '26px', borderRadius: '22px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', borderBottom: '1.5px dashed var(--border-primary)', paddingBottom: '12px' }}>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: '900', color: 'var(--text-main)' }}>
+              <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '18px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1.5px dashed var(--border-primary)', paddingBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: '900', color: 'var(--text-main)' }}>
                     💳 負債項目與輕鬆減壓 (Liabilities)
                   </h3>
-                  <span className="mono" style={{ fontWeight: '900', color: 'var(--text-main)', fontSize: '1.3rem' }}>
-                    合計: {totalLiabilitiesWan} 萬元
+                  <span className="mono" style={{ fontWeight: '900', color: 'var(--text-main)', fontSize: '1.15rem' }}>
+                    合計: {totalLiabilitiesWan} 萬
                   </span>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div className="step2-input-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   {[
                     { key: 'mortgageBalance', label: '🏠 房貸剩餘本金' },
                     { key: 'carLoanBalance', label: '🚗 車貸剩餘金額' },
@@ -646,7 +646,7 @@ export default function App() {
                     { key: 'personalLoanBalance', label: '📜 信貸 / 學貸餘額' },
                   ].map(item => (
                     <div key={item.key}>
-                      <label style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
+                      <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px', fontWeight: '600' }}>
                         {item.label}
                       </label>
                       <input
@@ -659,13 +659,13 @@ export default function App() {
                   ))}
                 </div>
 
-                <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1.5px dashed var(--border-primary)' }}>
-                  <h4 style={{ fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '10px', fontWeight: '800' }}>
-                    📝 聰明買房 / 房貸轉貸減壓備註 (幫助顧問評估降息方案)
+                <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1.5px dashed var(--border-primary)' }}>
+                  <h4 style={{ fontSize: '0.85rem', color: 'var(--text-main)', marginBottom: '8px', fontWeight: '800' }}>
+                    📝 房貸減壓備註 (評估降息方案)
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                     <div>
-                      <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>房貸銀行</label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>房貸銀行</label>
                       <input
                         type="text"
                         className="input-field"
@@ -674,7 +674,7 @@ export default function App() {
                       />
                     </div>
                     <div>
-                      <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>房貸利率 (%)</label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>房貸利率 (%)</label>
                       <input
                         type="number"
                         step="0.01"
@@ -689,7 +689,7 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '36px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '28px', flexWrap: 'wrap', gap: '12px' }}>
               <button className="btn btn-secondary" onClick={() => setStep(1)}>
                 <ArrowLeft size={18} /> 上一步
               </button>
@@ -702,94 +702,94 @@ export default function App() {
 
         {/* STEP 3: Report Dashboard */}
         {step === 3 && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '26px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
             
-            {/* Stat Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '18px' }}>
-              <div className="glass-panel glass-panel-hover" style={{ padding: '24px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '700' }}>✨ 當前家庭淨資產</div>
-                <div className="mono" style={{ fontSize: '1.85rem', fontWeight: '900', color: 'var(--color-primary)', marginTop: '4px' }}>
+            {/* Responsive Stat Cards */}
+            <div className="stat-card-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '14px' }}>
+              <div className="glass-panel glass-panel-hover" style={{ padding: '18px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '700' }}>✨ 家庭淨資產</div>
+                <div className="mono" style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-primary)', marginTop: '4px' }}>
                   ${netWorthWan.toLocaleString()} 萬
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '6px' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                   資產 {totalAssetsWan}萬 - 負債 {totalLiabilitiesWan}萬
                 </div>
               </div>
 
-              <div className="glass-panel glass-panel-hover" style={{ padding: '24px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '700' }}>💖 每月自由儲蓄額</div>
-                <div className="mono" style={{ fontSize: '1.85rem', fontWeight: '900', color: 'var(--color-primary)', marginTop: '4px' }}>
+              <div className="glass-panel glass-panel-hover" style={{ padding: '18px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '700' }}>💖 每月自由儲蓄</div>
+                <div className="mono" style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-primary)', marginTop: '4px' }}>
                   ${monthlySavings.toLocaleString()} 元
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '6px' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                   儲蓄率: {totalMonthlyIncome > 0 ? ((monthlySavings / totalMonthlyIncome) * 100).toFixed(1) : 0}%
                 </div>
               </div>
 
-              <div className="glass-panel glass-panel-hover" style={{ padding: '24px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '700' }}>☕ 自由預備金</div>
-                <div className="mono" style={{ fontSize: '1.85rem', fontWeight: '900', color: 'var(--color-primary)', marginTop: '4px' }}>
+              <div className="glass-panel glass-panel-hover" style={{ padding: '18px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '700' }}>☕ 自由預備金</div>
+                <div className="mono" style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--color-primary)', marginTop: '4px' }}>
                   {emergencyFundMonths} 個月
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '6px' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                   生活隨心無後顧之憂
                 </div>
               </div>
 
-              <div className="glass-panel glass-panel-hover" style={{ padding: '24px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '700' }}>🌟 槓桿健康指數</div>
-                <div className="mono" style={{ fontSize: '1.85rem', fontWeight: '900', color: 'var(--text-main)', marginTop: '4px' }}>
+              <div className="glass-panel glass-panel-hover" style={{ padding: '18px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '700' }}>🌟 槓桿健康度</div>
+                <div className="mono" style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--text-main)', marginTop: '4px' }}>
                   {debtRatioPct}%
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '6px' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                   {Number(debtRatioPct) < 50 ? '優雅健康比例' : '需適度減壓'}
                 </div>
               </div>
             </div>
 
             {/* Retirement & Dream Simulator */}
-            <div className="glass-panel" style={{ padding: '32px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: '900', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--color-primary)' }}>
-                <Sparkles size={26} /> 🏖️ 理想自由生活的複利與夢想試算
+            <div className="glass-panel section-panel" style={{ padding: '28px 22px', background: 'linear-gradient(135deg, #ffffff, var(--bg-soft-primary))' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '900', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-primary)' }}>
+                <Sparkles size={22} /> 🏖️ 理想自由生活的複利與夢想試算
               </h3>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'center' }}>
-                <div style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '20px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>當前年齡 / 期望自由年齡</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: '900', marginTop: '4px', color: 'var(--text-main)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '18px', alignItems: 'center' }}>
+                <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '18px', border: '1.5px solid var(--border-primary)', boxShadow: 'var(--shadow-card)' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>當前年齡 / 期望自由年齡</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: '900', marginTop: '4px', color: 'var(--text-main)' }}>
                     {currentAge} 歲 ➔ {basicInfo.targetRetireAge} 歲 (倒數 <span style={{ color: 'var(--color-primary)' }}>{yearsToRetire}</span> 年 ✨)
                   </div>
 
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '16px' }}>自由人生所需總水庫 (4%法則估算)</div>
-                  <div className="mono" style={{ fontSize: '1.6rem', fontWeight: '900', color: 'var(--text-main)' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '14px' }}>自由人生所需總水庫 (4%法則估算)</div>
+                  <div className="mono" style={{ fontSize: '1.45rem', fontWeight: '900', color: 'var(--text-main)' }}>
                     ${requiredRetireFundWan.toFixed(0)} 萬元
                   </div>
 
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '16px' }}>預計 {basicInfo.targetRetireAge} 歲時你累積的總資產 (複利 6%)</div>
-                  <div className="mono" style={{ fontSize: '1.6rem', fontWeight: '900', color: 'var(--color-primary)' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '14px' }}>預計 {basicInfo.targetRetireAge} 歲時你累積的總資產 (複利 6%)</div>
+                  <div className="mono" style={{ fontSize: '1.45rem', fontWeight: '900', color: 'var(--color-primary)' }}>
                     ${futureNetWorthWan.toFixed(0)} 萬元
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: '#ffffff', padding: '26px', borderRadius: '20px', border: '2px solid var(--color-primary)', boxShadow: '0 10px 30px var(--border-primary)' }}>
-                  <div style={{ fontSize: '0.98rem', color: 'var(--color-primary)', fontWeight: '900' }}>💖 理想生活進度真心評估：</div>
+                <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', border: '2px solid var(--color-primary)', boxShadow: '0 10px 30px var(--border-primary)' }}>
+                  <div style={{ fontSize: '0.92rem', color: 'var(--color-primary)', fontWeight: '900' }}>💖 理想生活進度真心評估：</div>
                   
                   {retireFundGapWan <= 0 ? (
-                    <div style={{ marginTop: '14px', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '14px' }}>
-                      <CheckCircle2 size={40} />
+                    <div style={{ marginTop: '12px', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <CheckCircle2 size={36} style={{ flexShrink: 0 }} />
                       <div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>太美好了！你的夢想藍圖完全在軌道上！</div>
-                        <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: '1.5' }}>
+                        <div style={{ fontSize: '1.1rem', fontWeight: '900' }}>太美好了！你的夢想藍圖完全在軌道上！</div>
+                        <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: '1.45' }}>
                           照目前的步調，你可在 {basicInfo.targetRetireAge} 歲時享有每月 ${basicInfo.desiredRetireMonthlyExpense} 元的被動收入，優雅擁抱自由！
                         </div>
                       </div>
                     </div>
                   ) : (
-                    <div style={{ marginTop: '14px', color: 'var(--color-primary)', display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-                      <Sparkles size={38} color="var(--color-primary)" style={{ flexShrink: 0 }} />
+                    <div style={{ marginTop: '12px', color: 'var(--color-primary)', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                      <Sparkles size={34} color="var(--color-primary)" style={{ flexShrink: 0 }} />
                       <div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>還差一點點！尚有 ${retireFundGapWan.toFixed(0)} 萬元的夢想距離</div>
-                        <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: '1.5' }}>
+                        <div style={{ fontSize: '1.1rem', fontWeight: '900' }}>還差一點點！尚有 ${retireFundGapWan.toFixed(0)} 萬元的夢想距離</div>
+                        <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: '1.45' }}>
                           只要適度優化資產配置（如聰明買房房貸減壓、獨立育兒帳戶複利），或每月再多投入約 <span style={{ color: 'var(--color-primary)', fontWeight: '900' }}>${((retireFundGapWan * 10000) / (yearsToRetire * 12)).toFixed(0)} 元</span>，就能加速實現理想生活！
                         </div>
                       </div>
@@ -800,69 +800,68 @@ export default function App() {
             </div>
 
             {/* Advisory Points highlighting Smart Home Buying & Child Account */}
-            <div className="glass-panel" style={{ padding: '32px' }}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '900', marginBottom: '20px', color: 'var(--text-main)' }}>
+            <div className="glass-panel section-panel" style={{ padding: '28px 22px' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '900', marginBottom: '16px', color: 'var(--text-main)' }}>
                 🌟 給你的 3 大專屬理財調優策略（包含「聰明買房」與「育兒帳戶」）
               </h3>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '20px' }}>
-                <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Key size={18} /> 1. 聰明買房與房貸輕鬆減壓
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+                <div style={{ backgroundColor: '#ffffff', padding: '18px', borderRadius: '16px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
+                  <div style={{ fontWeight: '900', fontSize: '0.96rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Key size={16} /> 1. 聰明買房與房貸輕鬆減壓
                   </div>
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: '1.5' }}>
                     精算最佳頭期款比例與銀行優質房貸轉貸方案，讓每月房貸輕鬆負擔，省下的利息轉為置產夢想基金。
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <PiggyBank size={18} /> 2. 獨立「專屬育兒複利帳戶」
+                <div style={{ backgroundColor: '#ffffff', padding: '18px', borderRadius: '16px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
+                  <div style={{ fontWeight: '900', fontSize: '0.96rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <PiggyBank size={16} /> 2. 獨立「專屬育兒複利帳戶」
                   </div>
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: '1.5' }}>
                     從寶寶出生即設立獨立成長與教育專用戶頭，善用時間複利滾動，輕鬆給孩子充足的學習與愛。
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: '#ffffff', padding: '22px', borderRadius: '18px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
-                  <div style={{ fontWeight: '900', fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Coffee size={18} /> 3. 被動收入水龍頭與退休防護
+                <div style={{ backgroundColor: '#ffffff', padding: '18px', borderRadius: '16px', borderLeft: '5px solid var(--color-primary)', boxShadow: 'var(--shadow-card)' }}>
+                  <div style={{ fontWeight: '900', fontSize: '0.96rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Coffee size={16} /> 3. 被動收入水龍頭與退休防護
                   </div>
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: '1.5' }}>
                     將閒置資產配置於每月配息的優質 ETF 組合，確保家庭生活隨心，風險來臨時依然穩如泰山。
                   </div>
                 </div>
               </div>
 
-              {/* Advisory CTA Card */}
-              <div style={{
-                marginTop: '32px',
-                padding: '28px 32px',
-                borderRadius: '24px',
+              {/* Responsive Advisory CTA Card */}
+              <div className="cta-banner" style={{
+                marginTop: '24px',
+                padding: '24px',
+                borderRadius: '20px',
                 background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-hover))',
                 color: '#ffffff',
                 boxShadow: '0 12px 35px var(--border-primary)',
                 display: 'flex',
                 justify: 'space-between',
                 alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '20px'
+                gap: '16px'
               }}>
                 <div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <Sparkles size={22} /> 專屬禮遇：免費預約「聰明買房 / 育兒帳戶 / 1對1靈感對談」 (價值 $3,000)
+                  <div style={{ fontSize: '1.18rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Sparkles size={20} /> 免費預約「聰明買房 / 育兒帳戶 / 1對1靈感對談」 (價值 $3,000)
                   </div>
-                  <div style={{ fontSize: '0.92rem', opacity: 0.95, marginTop: '8px' }}>
+                  <div style={{ fontSize: '0.85rem', opacity: 0.95, marginTop: '6px' }}>
                     由專業溫暖的理財顧問親自為你做頭期款試算、育兒戶頭複利規劃與房貸減壓。
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '14px' }}>
+                <div className="cta-banner-buttons" style={{ display: 'flex', gap: '10px', flexShrink: 0 }}>
                   <button className="btn btn-secondary" style={{ color: 'var(--text-main)' }} onClick={() => window.print()}>
-                    <Printer size={18} /> 保存報告
+                    <Printer size={16} /> 保存報告
                   </button>
-                  <button className="btn pulse-glow" style={{ backgroundColor: '#ffffff', color: 'var(--color-primary)', fontWeight: '900', padding: '14px 30px' }} onClick={() => setIsConsultModalOpen(true)}>
-                    <Send size={20} /> 預約專屬諮詢
+                  <button className="btn pulse-glow" style={{ backgroundColor: '#ffffff', color: 'var(--color-primary)', fontWeight: '900' }} onClick={() => setIsConsultModalOpen(true)}>
+                    <Send size={18} /> 預約專屬諮詢
                   </button>
                 </div>
               </div>
@@ -880,11 +879,11 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer style={{ maxWidth: '1040px', margin: '48px auto 20px auto', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+      <footer style={{ maxWidth: '1040px', margin: '36px auto 16px auto', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
         ✨ 理想生活目標計算機 | 聰明買房 ‧ 育兒帳戶 ‧ 獻給追求質感與自由的你 ✨
       </footer>
 
-      {/* Consultation Modal */}
+      {/* Responsive Consultation Modal */}
       {isConsultModalOpen && (
         <div style={{
           position: 'fixed',
@@ -898,12 +897,14 @@ export default function App() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
-          padding: '20px'
+          padding: '16px'
         }}>
-          <div className="glass-panel" style={{
+          <div className="glass-panel modal-container" style={{
             width: '100%',
-            maxWidth: '520px',
-            padding: '36px 32px',
+            maxWidth: '500px',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            padding: '32px 24px',
             position: 'relative',
             backgroundColor: '#ffffff',
             boxShadow: '0 24px 70px var(--border-primary)',
@@ -913,12 +914,12 @@ export default function App() {
               onClick={() => { setIsConsultModalOpen(false); setIsSubmitted(false); }}
               style={{
                 position: 'absolute',
-                top: '20px',
-                right: '20px',
+                top: '16px',
+                right: '16px',
                 background: 'none',
                 border: 'none',
                 color: 'var(--text-muted)',
-                fontSize: '1.4rem',
+                fontSize: '1.3rem',
                 cursor: 'pointer'
               }}
             >
@@ -927,20 +928,20 @@ export default function App() {
 
             {!isSubmitted ? (
               <form onSubmit={handleConsultSubmit}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)', marginBottom: '8px' }}>
-                  <Sparkles size={20} color="var(--color-primary)" />
-                  <span style={{ fontSize: '0.88rem', fontWeight: '800' }}>限定免費名額</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-primary)', marginBottom: '6px' }}>
+                  <Sparkles size={18} color="var(--color-primary)" />
+                  <span style={{ fontSize: '0.82rem', fontWeight: '800' }}>限定免費名額</span>
                 </div>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: '900', marginBottom: '8px', color: 'var(--text-main)' }}>
+                <h2 style={{ fontSize: '1.35rem', fontWeight: '900', marginBottom: '6px', color: 'var(--text-main)' }}>
                   預約 1對1 專屬理財靈感對談 ✨
                 </h2>
-                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '24px' }}>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>
                   請留下你的聯絡方式，顧問將依據你的家庭淨資產(${netWorthWan}萬)與自由缺口，為你量身訂製夢想清單。
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       你的稱呼 / 姓名 *
                     </label>
                     <input
@@ -954,7 +955,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       聯絡電話 *
                     </label>
                     <input
@@ -968,7 +969,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       電子信箱 Email (接收報告與試算) *
                     </label>
                     <input
@@ -982,7 +983,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       LINE ID (方便發送檔案)
                     </label>
                     <input
@@ -996,7 +997,7 @@ export default function App() {
 
                   {/* Priority Advisory Topic Selector */}
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       最想優先了解的專屬主題 *
                     </label>
                     <select
@@ -1012,7 +1013,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       方便諮詢的時段
                     </label>
                     <select
@@ -1027,7 +1028,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-main)', display: 'block', marginBottom: '4px' }}>
                       你目前最想了解的細節 (選填)
                     </label>
                     <textarea
@@ -1039,36 +1040,36 @@ export default function App() {
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-primary pulse-glow" style={{ width: '100%', padding: '15px', fontSize: '1.1rem', fontWeight: '800', marginTop: '12px' }}>
-                    <Send size={20} /> 確認送出靈感預約 ✨
+                  <button type="submit" className="btn btn-primary pulse-glow" style={{ width: '100%', padding: '14px', fontSize: '1.05rem', fontWeight: '800', marginTop: '10px' }}>
+                    <Send size={18} /> 確認送出靈感預約 ✨
                   </button>
                 </div>
               </form>
             ) : (
-              <div style={{ textAlign: 'center', padding: '28px 0' }}>
+              <div style={{ textAlign: 'center', padding: '24px 0' }}>
                 <div style={{
-                  width: '70px',
-                  height: '70px',
+                  width: '60px',
+                  height: '60px',
                   borderRadius: '50%',
                   backgroundColor: 'var(--bg-soft-primary)',
                   color: 'var(--color-primary)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 20px auto'
+                  margin: '0 auto 16px auto'
                 }}>
-                  <Sparkles size={40} color="var(--color-primary)" />
+                  <Sparkles size={36} color="var(--color-primary)" />
                 </div>
-                <h3 style={{ fontSize: '1.55rem', fontWeight: '900', color: 'var(--text-main)' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '900', color: 'var(--text-main)' }}>
                   預約成功！✨
                 </h3>
-                <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', marginTop: '10px', lineHeight: '1.6' }}>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: '1.55' }}>
                   我們已收到你的理想生活報告與「{consultForm.consultTopic}」諮詢需求，理財顧問將在 24 小時內親自與你聯繫！
                 </p>
 
                 <button
                   className="btn btn-secondary"
-                  style={{ marginTop: '32px', width: '100%', padding: '14px' }}
+                  style={{ marginTop: '28px', width: '100%', padding: '12px' }}
                   onClick={() => { setIsConsultModalOpen(false); setIsSubmitted(false); }}
                 >
                   返回靈感計算機
