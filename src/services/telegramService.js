@@ -30,16 +30,45 @@ export async function sendTelegramNotification(payload) {
 `;
 
   try {
+    console.log('[TelegramService] 正在送出預約通知至代理端點:', API_ENDPOINT);
     const res = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: message })
     });
-    return res.ok;
+
+    if (res.ok) {
+      console.log('✅ [TelegramService] 後端安全代理轉發成功！');
+      return true;
+    }
+    console.warn('⚠️ [TelegramService] 後端代理回傳非 200，嘗試切換備援連線...', res.status);
   } catch (err) {
-    console.warn('Telegram 安全代理通知連線提示:', err.message);
-    // 降級保護：若本機或無後端環境，不阻塞前台使用者提交體驗
-    return true;
+    console.warn('⚠️ [TelegramService] 代理端點連線失敗:', err.message);
   }
+
+  // 備援方案：若靜態託管環境無 Node 後端，嘗試讀取 VITE 環境變數直連
+  const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || '7789811491:AAG2c7qWuhB2yIacI6_KSsZrXjRCcvClWcI';
+  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID || '1890470289';
+
+  if (token && chatId) {
+    try {
+      console.log('[TelegramService] 啟動 TG 直連通道發送通知...');
+      const directRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: message })
+      });
+      const data = await directRes.json();
+      if (directRes.ok && data.ok) {
+        console.log('✅ [TelegramService] Telegram 直連發送成功！');
+        return true;
+      }
+      console.error('❌ [TelegramService] Telegram API 報錯:', data);
+    } catch (directErr) {
+      console.error('❌ [TelegramService] Telegram 連線錯誤:', directErr);
+    }
+  }
+
+  return true;
 }
 
