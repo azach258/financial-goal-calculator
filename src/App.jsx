@@ -2,24 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { sendTelegramNotification } from './services/telegramService';
 import { 
   Sparkles, 
-  Coffee, 
-  Home, 
-  Plane, 
-  Smile, 
+  Coffee,
   CheckCircle2, 
   Send, 
-  Printer, 
+  Printer,
   ArrowRight, 
   ArrowLeft, 
-  ShieldCheck,
-  Compass,
-  Users,
+  Compass, 
+  Users, 
   Target,
-  Palette,
-  Baby,
-  Heart,
-  Calendar,
-  PiggyBank,
+  Palette, 
+  PiggyBank, 
   Key
 } from 'lucide-react';
 
@@ -55,13 +48,7 @@ export default function App() {
 
   const calculateAge = (dobStr) => {
     if (!dobStr) return 30;
-    const dob = new Date(dobStr);
-    const now = new Date();
-    let age = now.getFullYear() - dob.getFullYear();
-    const m = now.getMonth() - dob.getMonth();
-    if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) {
-      age--;
-    }
+    const age = Math.floor((Date.now() - new Date(dobStr)) / (365.25 * 24 * 60 * 60 * 1000));
     return isNaN(age) || age <= 0 ? 30 : age;
   };
 
@@ -129,15 +116,8 @@ export default function App() {
   const monthlySavings = totalMonthlyIncome - Number(basicInfo.monthlyExpense || 0);
   const annualSavingsWan = (monthlySavings * 12) / 10000;
 
-  const totalAssetsWan = Object.entries(assets).reduce((sum, [key, val]) => {
-    if (typeof val === 'number') return sum + val;
-    return sum;
-  }, 0);
-
-  const totalLiabilitiesWan = Object.entries(liabilities).reduce((sum, [key, val]) => {
-    if (typeof val === 'number') return sum + val;
-    return sum;
-  }, 0);
+  const totalAssetsWan = Object.values(assets).reduce((sum, val) => sum + (typeof val === 'number' ? val : 0), 0);
+  const totalLiabilitiesWan = Object.values(liabilities).reduce((sum, val) => sum + (typeof val === 'number' ? val : 0), 0);
 
   const netWorthWan = totalAssetsWan - totalLiabilitiesWan;
   const debtRatioPct = totalAssetsWan > 0 ? ((totalLiabilitiesWan / totalAssetsWan) * 100).toFixed(1) : 0;
