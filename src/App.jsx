@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { sendTelegramNotification } from './services/telegramService';
+import { saveLead, getStoredLeads } from './services/leadStorageService';
+import AdminModal from './components/AdminModal';
 import { 
   Sparkles, 
   Coffee,
@@ -13,17 +15,35 @@ import {
   Target,
   Palette, 
   PiggyBank, 
-  Key
+  Key,
+  ShieldCheck,
+  Lock
 } from 'lucide-react';
 
 export default function App() {
   const [step, setStep] = useState(1);
   const [currentTheme, setCurrentTheme] = useState('theme-blue');
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
+  const [unreadLeadsCount, setUnreadLeadsCount] = useState(0);
 
-  // Sync theme to body class
+  // Sync theme to body class & load unread leads count
   useEffect(() => {
     document.body.className = currentTheme;
+    const leads = getStoredLeads();
+    setUnreadLeadsCount(leads.filter(l => l.status === 'new').length);
   }, [currentTheme]);
+
+  // Global hotkey (Alt+A or Ctrl+Shift+A) to open Admin
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.altKey && e.key.toLowerCase() === 'a') || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a')) {
+        e.preventDefault();
+        setIsAdminModalOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const themes = [
     { id: 'theme-blue', name: '冰川藍 (科技質感)', color: '#3b82f6' },
@@ -166,6 +186,13 @@ export default function App() {
     };
 
     console.log('正在送出諮詢資料與發送 Telegram 推播...', payload);
+    
+    // 1. 同步持久化保存至本地與後端 CRM 數據庫
+    await saveLead(payload);
+    const currentLeads = getStoredLeads();
+    setUnreadLeadsCount(currentLeads.filter(l => l.status === 'new').length);
+
+    // 2. 發送 Telegram 業務即時推播通知
     await sendTelegramNotification(payload);
   };
 
@@ -177,7 +204,7 @@ export default function App() {
         maxWidth: '1040px',
         margin: '0 auto 24px auto',
         display: 'flex',
-        justify: 'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
         padding: '14px 24px',
         borderRadius: '999px',
@@ -215,31 +242,74 @@ export default function App() {
           </div>
         </div>
 
-        {/* Dynamic Theme Color Selector */}
-        <div className="header-theme-selector" style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--bg-soft-primary)', padding: '6px 12px', borderRadius: '999px', border: '1px solid var(--border-primary)' }}>
-          <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <Palette size={14} /> 主題：
-          </span>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            {themes.map(t => (
-              <button
-                key={t.id}
-                title={t.name}
-                onClick={() => setCurrentTheme(t.id)}
-                style={{
-                  width: '18px',
-                  height: '18px',
-                  borderRadius: '50%',
-                  backgroundColor: t.color,
-                  border: currentTheme === t.id ? '2px solid #ffffff' : 'none',
-                  boxShadow: currentTheme === t.id ? '0 0 0 2px var(--color-primary)' : '0 2px 4px rgba(0,0,0,0.15)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  transform: currentTheme === t.id ? 'scale(1.2)' : 'scale(1)'
-                }}
-              />
-            ))}
+        {/* Right Action Bar (Theme + CRM Admin Button) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Dynamic Theme Color Selector */}
+          <div className="header-theme-selector" style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--bg-soft-primary)', padding: '6px 12px', borderRadius: '999px', border: '1px solid var(--border-primary)' }}>
+            <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Palette size={14} /> 主題：
+            </span>
+            <div style={{ display: 'flex', gap: '6px' }}>
+              {themes.map(t => (
+                <button
+                  key={t.id}
+                  title={t.name}
+                  onClick={() => setCurrentTheme(t.id)}
+                  style={{
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: '50%',
+                    backgroundColor: t.color,
+                    border: currentTheme === t.id ? '2px solid #ffffff' : 'none',
+                    boxShadow: currentTheme === t.id ? '0 0 0 2px var(--color-primary)' : '0 2px 4px rgba(0,0,0,0.15)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    transform: currentTheme === t.id ? 'scale(1.2)' : 'scale(1)'
+                  }}
+                />
+              ))}
+            </div>
           </div>
+
+          {/* CRM Admin Access Button */}
+          <button
+            onClick={() => setIsAdminModalOpen(true)}
+            title="顧問名單後台 (CRM 數據導出)"
+            style={{
+              padding: '6px 14px',
+              borderRadius: '999px',
+              border: '1.5px solid var(--border-primary)',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              color: 'var(--color-primary)',
+              fontSize: '0.78rem',
+              fontWeight: '800',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+              position: 'relative'
+            }}
+          >
+            <ShieldCheck size={15} /> 顧問後台
+            {unreadLeadsCount > 0 && (
+              <span style={{
+                position: 'absolute',
+                top: '-4px',
+                right: '-4px',
+                backgroundColor: '#ef4444',
+                color: '#ffffff',
+                fontSize: '0.68rem',
+                fontWeight: '900',
+                padding: '1px 6px',
+                borderRadius: '999px',
+                border: '1.5px solid #ffffff',
+                boxShadow: '0 2px 4px rgba(239, 68, 68, 0.4)'
+              }}>
+                {unreadLeadsCount}
+              </span>
+            )}
+          </button>
         </div>
       </header>
 
@@ -1061,6 +1131,50 @@ export default function App() {
         </div>
       )}
 
+      {/* Footer & Discreet CRM Link */}
+      <footer style={{
+        maxWidth: '1040px',
+        margin: '40px auto 0 auto',
+        padding: '24px 16px',
+        textAlign: 'center',
+        borderTop: '1px solid var(--border-primary)',
+        color: 'var(--text-secondary)',
+        fontSize: '0.82rem'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+          <span>© 2026 理想生活目標計算機 ‧ 實戰理財顧問 Raymond 專屬</span>
+          <span>‧</span>
+          <button
+            onClick={() => setIsAdminModalOpen(true)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-primary)',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '2px 6px',
+              borderRadius: '6px'
+            }}
+          >
+            <Lock size={12} /> 顧問管理後台 (CRM)
+          </button>
+        </div>
+      </footer>
+
+      {/* Admin CRM Modal */}
+      <AdminModal
+        isOpen={isAdminModalOpen}
+        onClose={() => {
+          setIsAdminModalOpen(false);
+          const currentLeads = getStoredLeads();
+          setUnreadLeadsCount(currentLeads.filter(i => i.status === 'new').length);
+        }}
+      />
+
     </div>
   );
 }
+
