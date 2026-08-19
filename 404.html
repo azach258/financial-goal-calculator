@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>正在跳轉至精算對比頁面...</title>
+  <script>
+    // Intelligent 404 Fallback Router for GitHub Pages
+    const path = window.location.pathname;
+    const search = window.location.search;
+    const hash = window.location.hash;
+
+    if (path.includes('fwd') || path.includes('chubb') || path.includes('comparison')) {
+      window.location.replace('https://azach258.github.io/financial-goal-calculator/comparison.html' + search + hash);
+    } else {
+      window.location.replace('https://azach258.github.io/financial-goal-calculator/' + search + hash);
+    }
+  </script>
+</head>
+<body style="font-family:sans-serif; text-align:center; padding:50px; background:#fdfbf8; color:#1f1610;">
+  <h2>🌸 正在為您載入精算頁面...</h2>
+  <p>若未自動跳轉，請點擊：<a href="https://azach258.github.io/financial-goal-calculator/comparison.html" style="color:#f75f54; font-weight:bold;">富衛 vs 安達 頂級分紅保單精算對比</a></p>
+</body>
+</html>
