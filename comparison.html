@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>富衛人壽 vs 安達人壽 頂級分紅保單精算對比 (100% 離線防破版旗艦版)</title>
+  
+  <!-- 
+    ★ 100% 零外部 CDN 依賴設計 (Zero-Dependency & Self-Contained)
+    徹底解決 iPad / 手機直接以檔案 (file://) 開啟時被系統安全機制阻擋外部 CDN (Tailwind/Chart.js/字型) 導致排版與圖表失效的致命痛點！
+  -->
+  <style>
+    /* ===================================================
+       1. 基礎設定與韓系柔和高對比調色盤
+    =================================================== */
+    :root {
+      --bg-gradient: linear-gradient(155deg, #fdfbf8 0%, #f7ede3 55%, #f2e4dc 100%);
+      --card-bg: #ffffff;
+      --card-border: #ebdcd0;
+      --card-shadow: 0 8px 24px -4px rgba(160, 110, 95, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+      
+      --color-fwd: #f75f54;        /* 軟萌蜜桃珊瑚粉 (高對比) */
+      --color-fwd-bg: #fff0ec;
+      --color-fwd-border: #ffcec4;
+
+      --color-chubb: #1d8cb8;      /* 冰淇淋粉藍 (高對比) */
+      --color-chubb-bg: #eaf5fb;
+      --color-chubb-border: #c6e7f5;
+
+      --color-green: #188a50;      /* 清新抹茶綠 (模式A) */
+      --color-green-bg: #e7f7ed;
+      --color-green-border: #bfe7d0;
+
+      --color-gold: #a67236;       /* 溫暖焦糖奶茶金 */
+      --color-gold-bg: #fbf3e8;
+      --color-gold-border: #edd5ba;
+
+      --text-main: #1f1610;        /* 黑咖啡深色字體，高清晰度 */
+      --text-muted: #59483e;       /* 次要內文字體 */
+      --text-light: #8c776b;
+      --border-soft: #ebdcd0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 90px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 32px 40px 60px 40px;
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ===================================================
+       2. 韓系卡片與結構排版
+    =================================================== */
+    .korean-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .korean-card {
+        padding: 24px;
+      }
+    }
+
+    .korean-card-highlight {
+      border: 2px solid var(--color-fwd-border);
+      box-shadow: 0 10px 28px -4px rgba(247, 95, 84, 0.12);
+    }
+
+    /* Grid 格線系統 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 1024px) {
+      .grid-4 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ===================================================
+       3. 標籤 (Badges) 與按鈕 (Buttons)
+    =================================================== */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .badge-fwd { background: var(--color-fwd-bg); color: var(--color-fwd); border: 1.5px solid var(--color-fwd-border); }
+    .badge-chubb { background: var(--color-chubb-bg); color: var(--color-chubb); border: 1.5px solid var(--color-chubb-border); }
+    .badge-green { background: var(--color-green-bg); color: var(--color-green); border: 1.5px solid var(--color-green-border); }
+    .badge-gold { background: var(--color-gold-bg); color: var(--color-gold); border: 1.5px solid var(--color-gold-border); }
+
+    .header-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--border-soft);
+      margin-bottom: 20px;
+    }
+    @media (min-width: 1024px) {
+      .header-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-main);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    @media (min-width: 768px) {
+      h1 { font-size: 30px; }
+    }
+
+    .pill-tag {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      padding: 3px 12px;
+      border-radius: 9999px;
+    }
+
+    /* 幣別切換按鈕 */
+    .currency-switcher {
+      display: inline-flex;
+      background: #ffffff;
+      padding: 4px;
+      border-radius: 16px;
+      border: 2px solid var(--border-soft);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .cur-btn {
+      padding: 8px 16px;
+      border-radius: 12px;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-muted);
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .cur-btn.active {
+      background: linear-gradient(135deg, #f75f54 0%, #eb4470 100%);
+      color: #ffffff;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(247, 95, 84, 0.35);
+    }
+
+    /* ===================================================
+       4. 手機滑動 Tab 導航列
+    =================================================== */
+    .nav-tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 8px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-soft);
+      border-radius: 18px;
+      margin-bottom: 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-soft);
+      background: #ffffff;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    @media (min-width: 768px) {
+      .tab-btn { font-size: 14px; padding: 12px 20px; }
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #f75f54 0%, #eb4470 100%);
+      color: #ffffff !important;
+      font-weight: 900;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(247, 95, 84, 0.3);
+    }
+
+    /* ===================================================
+       5. 100% 原生 SVG 向量響應式圖表 (完全零依賴)
+    =================================================== */
+    .chart-container {
+      width: 100%;
+      position: relative;
+      background: #ffffff;
+      padding: 12px 4px;
+      border-radius: 16px;
+    }
+    svg.responsive-chart {
+      width: 100%;
+      height: 280px;
+      overflow: visible;
+    }
+    @media (min-width: 768px) {
+      svg.responsive-chart { height: 340px; }
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 18px;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+    }
+
+    /* ===================================================
+       6. 手機專屬速查卡片 vs 平板/電腦完整大表格
+    =================================================== */
+    .mobile-cards { display: block; }
+    .desktop-table { display: none; }
+
+    @media (min-width: 768px) {
+      .mobile-cards { display: none; }
+      .desktop-table { display: block; }
+    }
+
+    .year-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .year-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 10px;
+      font-weight: 900;
+      font-size: 15px;
+    }
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* 寬螢幕完整表格 */
+    table.full-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    table.full-table th, table.full-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f0e2d8;
+    }
+    table.full-table th {
+      background: #faeedf;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+    table.full-table tr:hover {
+      background: #fff8f5;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- 頂部 Header -->
+    <header>
+      <div class="header-top">
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="badge badge-gold">👑 VIP 私人財富管理精算提案</span>
+            <span class="badge badge-green">🎁 含 10% 保費折扣雙精算</span>
+            <span class="badge" style="background:#ffffff; color:var(--text-muted); border:1.5px solid var(--border-soft);">🌸 匯率 1 USD ≈ 32 TWD</span>
+          </div>
+
+          <h1>
+            <span>富衛人壽</span>
+            <span class="pill-tag" style="background:var(--color-fwd);">FWD 盈聚・天下 II</span>
+            <span style="color:var(--text-light); font-weight:normal; margin:0 4px;">×</span>
+            <span>安達人壽</span>
+            <span class="pill-tag" style="background:var(--color-chubb);">CHUBB 傳承守創 V</span>
+          </h1>
+
+          <p style="color:var(--text-muted); font-size:13px; font-weight:600; margin-top:6px;">
+            🌸 <strong>精算模型</strong>：32歲女性 VIP | 5年完繳 | 富衛實繳 <strong style="color:var(--color-fwd);">$60,000 USD</strong> (約192萬NTD) vs 安達折扣雙方案
+          </p>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="currency-switcher">
+            <button id="btnUSD" class="cur-btn active" onclick="setCurrency('USD')">USD 美元</button>
+            <button id="btnTWD" class="cur-btn" onclick="setCurrency('TWD')">TWD 台幣 (萬)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 大核心 KPI 卡片 -->
+      <div class="grid-4" style="margin-bottom:20px;">
+        <div class="korean-card" style="border-left:5px solid var(--color-green); margin:0; padding:14px;">
+          <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:12px; font-weight:700;">
+            <span>模式 A: 省現金</span> <span>💰</span>
+          </div>
+          <div style="font-size:20px; font-weight:900; color:var(--color-green); margin:4px 0;">現省 $6,000</div>
+          <p style="font-size:12px; color:var(--text-muted); font-weight:600;">實繳 $5.4萬，現省 <strong>19.2 萬台幣</strong> 留身邊。</p>
+        </div>
+
+        <div class="korean-card" style="border-left:5px solid var(--color-chubb); margin:0; padding:14px;">
+          <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:12px; font-weight:700;">
+            <span>模式 B: 放大保額</span> <span>🚀</span>
+          </div>
+          <div style="font-size:20px; font-weight:900; color:var(--color-chubb); margin:4px 0;">規模放大 1.11倍</div>
+          <p style="font-size:12px; color:var(--text-muted); font-weight:600;">同繳 $60k，30年滾存破 <strong>1,249 萬 NTD</strong>。</p>
+        </div>
+
+        <div class="korean-card" style="border-left:5px solid var(--color-fwd); margin:0; padding:14px;">
+          <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:12px; font-weight:700;">
+            <span>前期流動防禦</span> <span>🛡️</span>
+          </div>
+          <div style="font-size:20px; font-weight:900; color:var(--color-fwd); margin:4px 0;">富衛 FWD 領先</div>
+          <p style="font-size:12px; color:var(--text-muted); font-weight:600;">第5年退保達 59%，自帶 <strong>200% 意外身故保障</strong>。</p>
+        </div>
+
+        <div class="korean-card" style="border-left:5px solid var(--color-gold); margin:0; padding:14px;">
+          <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:12px; font-weight:700;">
+            <span>30年純滾存</span> <span>📈</span>
+          </div>
+          <div style="font-size:20px; font-weight:900; color:var(--color-gold); margin:4px 0;">5.85 ~ 6.5 倍</div>
+          <p style="font-size:12px; color:var(--text-muted); font-weight:600;">投入 192 萬，第30年本金增值至 <strong>1,124~1,249 萬</strong>。</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab 導航按鈕列 -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" id="btn-tab-discount" onclick="switchTab('tab-discount')">🎟️ 雙保費折扣精算</button>
+      <button class="tab-btn" id="btn-tab-growth" onclick="switchTab('tab-growth')">📈 1. 全期純滾存</button>
+      <button class="tab-btn" id="btn-tab-wd6" onclick="switchTab('tab-wd6')">🍪 2. 第6年提領 6%</button>
+      <button class="tab-btn" id="btn-tab-wd11" onclick="switchTab('tab-wd11')">☕ 3. 第11年提領 9%</button>
+      <button class="tab-btn" id="btn-tab-wd21" onclick="switchTab('tab-wd21')">👑 4. 第21年提領 18%</button>
+      <button class="tab-btn" id="btn-tab-features" onclick="switchTab('tab-features')">💎 5. 傳承與架構</button>
+      <button class="tab-btn" id="btn-tab-safety" onclick="switchTab('tab-safety')">🛡️ 6. 境外安全 SOP</button>
+    </nav>
+
+    <!-- ======================================================== -->
+    <!-- TAB 0: 雙保費折扣精算專頁                                -->
+    <!-- ======================================================== -->
+    <main id="tab-discount" class="tab-content active">
+      
+      <!-- 兩種哲學卡片 -->
+      <div class="grid-2" style="margin-bottom:20px;">
+        <div class="korean-card" style="border-top:6px solid var(--color-green); margin:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span class="badge badge-green">模式 A：直接打 9 折 (省現金)</span>
+            <span style="font-size:12px; font-weight:900; color:var(--color-green);">現省 NT$ 19.2 萬</span>
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text-main); margin-bottom:8px;">名義 $12,000，實繳 $10,800/年</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            • <strong>訴求</strong>：少拿本金出門，把省下來的 19.2 萬台幣留身邊。<br>
+            • <strong>出資</strong>：5年總繳 <strong>$54,000 USD</strong> (約 172.8 萬台幣)。<br>
+            • <strong>利益</strong>：享 $60k 規模完整分紅，<strong>30年實質 ROI 高達 650.5%</strong>！
+          </p>
+          <div style="background:var(--color-green-bg); border:1px solid var(--color-green-border); padding:10px; border-radius:12px; margin-top:12px; font-size:12px; font-weight:800; color:var(--color-green);">
+            💰 30年退保值 $351,284 ÷ 實繳 $54,000 = 實質 ROI 650.5% (淨賺 $29.7萬美元)
+          </div>
+        </div>
+
+        <div class="korean-card" style="border-top:6px solid var(--color-chubb); margin:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span class="badge badge-chubb">模式 B：實繳 1.2 萬放大保額</span>
+            <span style="font-size:12px; font-weight:900; color:var(--color-chubb);">等比放大 +11.11%</span>
+          </div>
+          <h3 style="font-size:18px; font-weight:900; color:var(--text-main); margin-bottom:8px;">實繳 $12,000，名義保費 $13,333/年</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            • <strong>訴求</strong>：固定出資 192 萬 ($60k)，利用折扣槓桿把未來資產池放大。<br>
+            • <strong>出資</strong>：5年總繳 <strong>$60,000 USD</strong> (與富衛出資 100% 相同)。<br>
+            • <strong>利益</strong>：名義規模擴大至 <strong>$66,667 USD</strong>，全期分紅與提領<strong>全面放大 1.111 倍</strong>！
+          </p>
+          <div style="background:var(--color-chubb-bg); border:1px solid var(--color-chubb-border); padding:10px; border-radius:12px; margin-top:12px; font-size:12px; font-weight:800; color:var(--color-chubb);">
+            🚀 30年退保值達 $390,316 USD (約 1,249 萬台幣)，比富衛多賺整整 125 萬！
+          </div>
+        </div>
+      </div>
+
+      <!-- 100% 原生 SVG 走勢圖表 (無外部依賴，秒開) -->
+      <div class="korean-card">
+        <h3 style="font-size:17px; font-weight:900; color:var(--text-main); margin-bottom:4px;">
+          📈 三大方案全期資產總值走勢對照 (退保總價值)
+        </h3>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+          富衛原版 ($60k) vs 安達模式A ($54k) vs 安達模式B ($60k回推放大)
+        </p>
+
+        <div class="chart-container">
+          <svg id="svg-discount-chart" class="responsive-chart" viewBox="0 0 700 280"></svg>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-fwd);"></div> 富衛 FWD (實繳$60k)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-green);"></div> 安達 模式A (實繳$54k)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-chubb);"></div> 安達 模式B (實繳$60k放大)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📱 手機專屬：清晰年度速查卡片 (絕不破版) -->
+      <div class="mobile-cards">
+        <h3 style="font-size:16px; font-weight:900; margin-bottom:12px;">🌟 關鍵年度精算速查卡</h3>
+
+        <!-- Year 10 -->
+        <div class="year-card" style="border-left:5px solid var(--color-gold);">
+          <div class="year-card-header">
+            <span>第 10 年 (42歲) - 翻本期</span>
+          </div>
+          <div class="data-row" style="background:var(--color-fwd-bg);">
+            <span style="color:var(--text-muted);">🍑 富衛 FWD ($60k)</span>
+            <span style="color:var(--color-fwd); font-weight:900;" class="val-fwd-10">$79,285 (253.7萬)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-green-bg);">
+            <span style="color:var(--text-muted);">🌿 安達 模式A ($54k)</span>
+            <span style="color:var(--color-green); font-weight:900;" class="val-chubba-10">$76,133 (ROI 141%)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-chubb-bg); border:1.5px solid var(--color-chubb-border);">
+            <span style="color:var(--text-main);">🍧 安達 模式B ($60k放大)</span>
+            <span style="color:var(--color-chubb); font-weight:900;" class="val-chubbb-10">$84,592 (多賺17萬) 🏆</span>
+          </div>
+        </div>
+
+        <!-- Year 20 -->
+        <div class="year-card" style="border-left:5px solid var(--color-gold);">
+          <div class="year-card-header">
+            <span>第 20 年 (52歲) - 翻倍期</span>
+          </div>
+          <div class="data-row" style="background:var(--color-fwd-bg);">
+            <span style="color:var(--text-muted);">🍑 富衛 FWD ($60k)</span>
+            <span style="color:var(--color-fwd); font-weight:900;" class="val-fwd-20">$171,837 (549.9萬)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-green-bg);">
+            <span style="color:var(--text-muted);">🌿 安達 模式A ($54k)</span>
+            <span style="color:var(--color-green); font-weight:900;" class="val-chubba-20">$167,760 (ROI 310%)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-chubb-bg); border:1.5px solid var(--color-chubb-border);">
+            <span style="color:var(--text-main);">🍧 安達 模式B ($60k放大)</span>
+            <span style="color:var(--color-chubb); font-weight:900;" class="val-chubbb-20">$186,400 (多賺46.6萬) 🏆</span>
+          </div>
+        </div>
+
+        <!-- Year 30 -->
+        <div class="year-card korean-card-highlight" style="border-left:5px solid var(--color-fwd);">
+          <div class="year-card-header">
+            <span style="color:var(--color-fwd);">👑 第 30 年 (62歲) - 千萬養老金</span>
+          </div>
+          <div class="data-row" style="background:var(--color-fwd-bg);">
+            <span style="color:var(--text-muted);">🍑 富衛 FWD ($60k)</span>
+            <span style="color:var(--color-fwd); font-weight:900;" class="val-fwd-30">$351,278 (1,124萬)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-green-bg);">
+            <span style="color:var(--text-muted);">🌿 安達 模式A ($54k)</span>
+            <span style="color:var(--color-green); font-weight:900;" class="val-chubba-30">$351,284 (1,124萬)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-chubb-bg); border:2px solid var(--color-chubb);">
+            <span style="color:var(--text-main);">🍧 安達 模式B ($60k放大)</span>
+            <span style="color:var(--color-chubb); font-weight:900;" class="val-chubbb-30">$390,316 (多賺125萬!) 🏆</span>
+          </div>
+        </div>
+
+        <!-- Year 40 -->
+        <div class="year-card" style="border-left:5px solid var(--color-chubb);">
+          <div class="year-card-header">
+            <span>💎 第 40 年 (71歲) - 代代傳承期</span>
+          </div>
+          <div class="data-row" style="background:var(--color-fwd-bg);">
+            <span style="color:var(--text-muted);">🍑 富衛 FWD ($60k)</span>
+            <span style="color:var(--color-fwd); font-weight:900;" class="val-fwd-40">$619,161 (1,981萬)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-green-bg);">
+            <span style="color:var(--text-muted);">🌿 安達 模式A ($54k)</span>
+            <span style="color:var(--color-green); font-weight:900;" class="val-chubba-40">$659,408 (2,110萬)</span>
+          </div>
+          <div class="data-row" style="background:var(--color-chubb-bg); border:1.5px solid var(--color-chubb-border);">
+            <span style="color:var(--text-main);">🍧 安達 模式B ($60k放大)</span>
+            <span style="color:var(--color-chubb); font-weight:900;" class="val-chubbb-40">$732,676 (多賺363萬!) 🏆</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 💻 平板/電腦端：完整大表格 -->
+      <div class="desktop-table korean-card">
+        <h3 style="font-size:16px; font-weight:900; margin-bottom:12px;">📊 三大方案全期精算數據對照矩陣</h3>
+        <table class="full-table">
+          <thead>
+            <tr>
+              <th>保單年度 (年齡)</th>
+              <th style="color:var(--color-fwd);">富衛 FWD (實繳$60k)</th>
+              <th style="color:var(--color-green);">安達 模式A (實繳$54k)</th>
+              <th style="color:var(--color-green);">模式A 實質ROI</th>
+              <th style="color:var(--color-chubb);">安達 模式B (實繳$60k放大)</th>
+              <th style="color:var(--color-gold);">模式 B vs 富衛 領先差距</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>第 5 年 (37歲)</strong></td>
+              <td style="color:var(--color-fwd); font-weight:900;">$35,673 (114.1萬)</td>
+              <td>$15,263 (48.8萬)</td>
+              <td>28.3%</td>
+              <td style="color:var(--color-chubb); font-weight:900;">$16,959 (54.3萬)</td>
+              <td><span class="badge badge-fwd">FWD 前期退保高</span></td>
+            </tr>
+            <tr style="background:#fcf8f4;">
+              <td><strong style="color:var(--color-gold);">第 10 年 (42歲)</strong></td>
+              <td style="color:var(--color-fwd); font-weight:900;">$79,285 (253.7萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">$76,133 (243.6萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">141.0%</td>
+              <td style="color:var(--color-chubb); font-weight:900;">$84,592 (270.7萬)</td>
+              <td><span class="badge badge-chubb">模式B多 +$5,307 (17萬NTD)</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 15 年 (47歲)</strong></td>
+              <td style="color:var(--color-fwd); font-weight:900;">$113,408 (362.9萬)</td>
+              <td>$104,392 (334.1萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">193.3%</td>
+              <td style="color:var(--color-chubb); font-weight:900;">$115,991 (371.2萬)</td>
+              <td><span class="badge badge-chubb">模式B多 +$2,583 (8.3萬NTD)</span></td>
+            </tr>
+            <tr style="background:#fcf8f4;">
+              <td><strong style="color:var(--color-gold);">第 20 年 (52歲)</strong></td>
+              <td style="color:var(--color-fwd); font-weight:900;">$171,837 (549.9萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">$167,760 (536.8萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">310.7%</td>
+              <td style="color:var(--color-chubb); font-weight:900;">$186,400 (596.5萬)</td>
+              <td><span class="badge badge-chubb">模式B多 +$14,563 (46.6萬NTD)</span></td>
+            </tr>
+            <tr style="background:#fdf5ed;">
+              <td><strong style="color:var(--color-gold); font-size:14px;">第 30 年 (62歲)</strong></td>
+              <td style="color:var(--color-fwd); font-weight:900;">$351,278 (1,124萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">$351,284 (1,124萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">650.5%</td>
+              <td style="color:var(--color-chubb); font-weight:900; font-size:14px;">$390,316 (1,249萬)</td>
+              <td><span class="badge badge-chubb" style="font-weight:900;">模式B多 +$39,038 (125萬NTD)</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 40 年 (71歲)</strong></td>
+              <td style="color:var(--color-fwd); font-weight:900;">$619,161 (1,981萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">$659,408 (2,110萬)</td>
+              <td style="color:var(--color-green); font-weight:900;">1,221.1%</td>
+              <td style="color:var(--color-chubb); font-weight:900;">$732,676 (2,345萬)</td>
+              <td><span class="badge badge-chubb">模式B多 +$113,515 (363萬NTD)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: 全期純滾存 (不提領)                                 -->
+    <!-- ======================================================== -->
+    <main id="tab-growth" class="tab-content">
+      <div class="korean-card">
+        <h3 style="font-size:18px; font-weight:900; margin-bottom:10px;">📈 不提領純複利增長趨勢對比</h3>
+        <div class="chart-container">
+          <svg id="svg-growth-chart" class="responsive-chart" viewBox="0 0 700 280"></svg>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-fwd);"></div> 富衛人壽 (FWD)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-chubb);"></div> 安達人壽 (CHUBB)</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: 第6年提領 6%                                      -->
+    <!-- ======================================================== -->
+    <main id="tab-wd6" class="tab-content">
+      <div class="korean-card" style="border-left:6px solid var(--color-fwd);">
+        <h2 style="font-size:20px; font-weight:900;">
+          從第 6 年起，每年固定提領 <span style="color:var(--color-fwd);">$3,600 美元</span> (約 NT$ 115,200 / 年)
+        </h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-top:4px;">本金僅繳 5 年，第 6 年起年年領終身，帳戶剩餘價值不減反增！</p>
+      </div>
+      <div class="korean-card">
+        <div class="chart-container">
+          <svg id="svg-wd6-chart" class="responsive-chart" viewBox="0 0 700 280"></svg>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-fwd);"></div> 富衛 FWD 剩餘帳戶價值</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-chubb);"></div> 安達 CHUBB 剩餘帳戶價值</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 3: 第11年提領 9%                                     -->
+    <!-- ======================================================== -->
+    <main id="tab-wd11" class="tab-content">
+      <div class="korean-card" style="border-left:6px solid var(--color-gold);">
+        <h2 style="font-size:20px; font-weight:900;">
+          從第 11 年起，每年固定提領 <span style="color:var(--color-gold);">$5,400 美元</span> (約 NT$ 172,800 / 年，月領約 1.44 萬)
+        </h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-top:4px;">前10年充分滾存複利翻倍，第11年起享受高達 9% 現金流！</p>
+      </div>
+      <div class="korean-card">
+        <div class="chart-container">
+          <svg id="svg-wd11-chart" class="responsive-chart" viewBox="0 0 700 280"></svg>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-fwd);"></div> 富衛 FWD 剩餘價值</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-chubb);"></div> 安達 CHUBB 剩餘價值</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 4: 第21年提領 18%                                    -->
+    <!-- ======================================================== -->
+    <main id="tab-wd21" class="tab-content">
+      <div class="korean-card" style="border-left:6px solid var(--color-green);">
+        <h2 style="font-size:20px; font-weight:900;">
+          從第 21 年起，每年固定提領 <span style="color:var(--color-green);">$10,800 美元</span> (約 NT$ 345,600 / 年，月領 2.88 萬)
+        </h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-top:4px;">20年充分複利發酵，每年領近 35 萬台幣，本金依然在 650 萬以上！</p>
+      </div>
+      <div class="korean-card">
+        <div class="chart-container">
+          <svg id="svg-wd21-chart" class="responsive-chart" viewBox="0 0 700 280"></svg>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-fwd);"></div> 富衛 FWD 餘額</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-chubb);"></div> 安達 CHUBB 餘額</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 5: 傳承與產品架構                                      -->
+    <!-- ======================================================== -->
+    <main id="tab-features" class="tab-content">
+      <div class="grid-2">
+        <div class="korean-card" style="border-top:5px solid var(--color-fwd);">
+          <h3 style="font-size:18px; font-weight:900; margin-bottom:8px;">富衛人壽 - 盈聚・天下 II</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            🛡️ <strong>護家保意外身故權益</strong>：首10年額外贈送 200% 保費意外身故保障 ($24,000 USD)。<br>
+            ⚡ <strong>前期回本防禦極快</strong>：第5年退保總值達 59%，第8年實質回本。
+          </p>
+        </div>
+        <div class="korean-card" style="border-top:5px solid var(--color-chubb);">
+          <h3 style="font-size:18px; font-weight:900; margin-bottom:8px;">安達人壽 - 傳承守創 V (豐成)</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            🏷️ <strong>三重客戶保費折扣 (10%)</strong>：每年直接享折扣，可省現金或放大保額。<br>
+            ♾️ <strong>保障年期鎖定至 120 歲</strong>：第40年純滾存終期紅利反超 FWD。
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 6: 境外安全與匯款 SOP                                  -->
+    <!-- ======================================================== -->
+    <main id="tab-safety" class="tab-content">
+      <div class="korean-card" style="border-left:5px solid var(--color-fwd);">
+        <h3 style="font-size:18px; font-weight:900; margin-bottom:8px;">🛡️ 境外投保 3 步標準行政 SOP</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+          1. <strong>建立客戶資料表</strong>：提供護照正本（效期 > 6個月）初審。<br>
+          2. <strong>簽約 & 銀行直匯</strong>：首年臨櫃直匯保險公司香港 HSBC 官方帳戶。<br>
+          3. <strong>收受保單正本</strong>：約 1.5 ~ 2 個月收到核保通過之正式保單。
+        </p>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 7. 零依賴原生 SVG 圖表渲染引擎 (100% 本地秒開、絕不拋錯) -->
+  <!-- ======================================================== -->
+  <script>
+    let currentCurrency = 'USD';
+    const rate = 32;
+
+    const labels = ['第1年', '第3年', '第5年', '第10年', '第15年', '第20年', '第25年', '第30年', '第40年'];
+    const fwdGrowth = [0, 15448, 35673, 79285, 113408, 171837, 256388, 351278, 619161];
+    const chubbGrowthA = [0, 3415, 15263, 76133, 104392, 167760, 244098, 351284, 659408];
+    const chubbGrowthB = [0, 3794, 16959, 84592, 115991, 186400, 271220, 390316, 732676];
+
+    const wd6Labels = ['第5年', '第10年', '第15年', '第20年', '第25年', '第30年', '第40年', '第50年'];
+    const fwdWd6Balance = [35673, 60633, 70516, 92897, 116625, 139290, 212887, 351039];
+    const chubbWd6Balance = [15263, 52944, 52518, 63389, 71067, 81858, 105973, 151148];
+
+    function formatVal(v) {
+      if (currentCurrency === 'TWD') {
+        return (v * rate / 10000).toFixed(1) + ' 萬 NTD';
+      }
+      return '$' + Number(v).toLocaleString() + ' USD';
+    }
+
+    function setCurrency(cur) {
+      currentCurrency = cur;
+      document.getElementById('btnUSD').className = cur === 'USD' ? 'cur-btn active' : 'cur-btn';
+      document.getElementById('btnTWD').className = cur === 'TWD' ? 'cur-btn active' : 'cur-btn';
+      renderAllCharts();
+      updateCardTexts();
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('btn-' + tabId).classList.add('active');
+    }
+
+    function updateCardTexts() {
+      // 動態更新手機卡片上的數字
+      const getFormatted = (v) => currentCurrency === 'TWD' ? (v * rate / 10000).toFixed(1) + ' 萬' : '$' + Number(v).toLocaleString();
+      
+      document.querySelectorAll('.val-fwd-10').forEach(el => el.innerText = getFormatted(79285));
+      document.querySelectorAll('.val-chubba-10').forEach(el => el.innerText = getFormatted(76133) + ' (ROI 141%)');
+      document.querySelectorAll('.val-chubbb-10').forEach(el => el.innerText = getFormatted(84592) + ' (多賺' + (currentCurrency==='TWD'?'17萬':'$5.3k') + ') 🏆');
+
+      document.querySelectorAll('.val-fwd-20').forEach(el => el.innerText = getFormatted(171837));
+      document.querySelectorAll('.val-chubba-20').forEach(el => el.innerText = getFormatted(167760) + ' (ROI 310%)');
+      document.querySelectorAll('.val-chubbb-20').forEach(el => el.innerText = getFormatted(186400) + ' (多賺' + (currentCurrency==='TWD'?'46.6萬':'$14.5k') + ') 🏆');
+
+      document.querySelectorAll('.val-fwd-30').forEach(el => el.innerText = getFormatted(351278));
+      document.querySelectorAll('.val-chubba-30').forEach(el => el.innerText = getFormatted(351284));
+      document.querySelectorAll('.val-chubbb-30').forEach(el => el.innerText = getFormatted(390316) + ' (多賺' + (currentCurrency==='TWD'?'125萬!':'$39k!') + ') 🏆');
+
+      document.querySelectorAll('.val-fwd-40').forEach(el => el.innerText = getFormatted(619161));
+      document.querySelectorAll('.val-chubba-40').forEach(el => el.innerText = getFormatted(659408));
+      document.querySelectorAll('.val-chubbb-40').forEach(el => el.innerText = getFormatted(732676) + ' (多賺' + (currentCurrency==='TWD'?'363萬!':'$113k!') + ') 🏆');
+    }
+
+    // 🌸 輕量級純原生 SVG 折線圖產生器 (零外部依賴，支援 Retina 與各尺寸)
+    function renderSvgLineChart(svgId, xLabels, datasets, maxVal) {
+      const svg = document.getElementById(svgId);
+      if (!svg) return;
+      
+      const width = 700;
+      const height = 280;
+      const padL = 65;
+      const padR = 30;
+      const padT = 30;
+      const padB = 40;
+
+      const chartW = width - padL - padR;
+      const chartH = height - padT - padB;
+
+      let html = '';
+
+      // 背景水平網格線
+      const gridCount = 4;
+      for (let i = 0; i <= gridCount; i++) {
+        const y = padT + (chartH / gridCount) * i;
+        const val = maxVal - (maxVal / gridCount) * i;
+        const labelText = currentCurrency === 'TWD' ? (val * rate / 10000).toFixed(0) + '萬' : '$' + Math.round(val / 1000) + 'k';
+        html += `<line x1="${padL}" y1="${y}" x2="${width - padR}" y2="${y}" stroke="#eeddd0" stroke-width="1.2" stroke-dasharray="3,3"/>`;
+        html += `<text x="${padL - 8}" y="${y + 4}" font-size="11" font-weight="700" fill="#8c776b" text-anchor="end">${labelText}</text>`;
+      }
+
+      // X 軸標籤
+      const stepX = chartW / (xLabels.length - 1);
+      xLabels.forEach((lbl, idx) => {
+        const x = padL + idx * stepX;
+        html += `<text x="${x}" y="${height - 12}" font-size="11" font-weight="700" fill="#59483e" text-anchor="middle">${lbl}</text>`;
+      });
+
+      // 繪製各條數據折線
+      datasets.forEach(ds => {
+        let points = [];
+        ds.data.forEach((val, idx) => {
+          const x = padL + idx * stepX;
+          const y = padT + chartH - (val / maxVal) * chartH;
+          points.push({ x, y, val });
+        });
+
+        // 折線路徑
+        const pathD = points.map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`)).join(' ');
+        html += `<path d="${pathD}" fill="none" stroke="${ds.color}" stroke-width="${ds.strokeWidth || 3.5}" stroke-dasharray="${ds.dash || 'none'}"/>`;
+
+        // 數據圓點
+        points.forEach(p => {
+          html += `<circle cx="${p.x}" cy="${p.y}" r="${ds.radius || 4.5}" fill="${ds.color}" stroke="#ffffff" stroke-width="1.5"/>`;
+        });
+      });
+
+      svg.innerHTML = html;
+    }
+
+    function renderAllCharts() {
+      // 1. 折扣三方對決 SVG 圖表
+      renderSvgLineChart('svg-discount-chart', labels, [
+        { color: '#f75f54', strokeWidth: 3.5, radius: 4.5, data: fwdGrowth },
+        { color: '#188a50', strokeWidth: 3, dash: '5,5', radius: 4, data: chubbGrowthA },
+        { color: '#1d8cb8', strokeWidth: 4, radius: 5.5, data: chubbGrowthB }
+      ], 760000);
+
+      // 2. 純滾存 SVG 圖表
+      renderSvgLineChart('svg-growth-chart', labels, [
+        { color: '#f75f54', strokeWidth: 3.5, radius: 4.5, data: fwdGrowth },
+        { color: '#1d8cb8', strokeWidth: 3.5, radius: 4.5, data: chubbGrowthA }
+      ], 680000);
+
+      // 3. 提領 6% SVG 圖表
+      renderSvgLineChart('svg-wd6-chart', wd6Labels, [
+        { color: '#f75f54', strokeWidth: 3.5, radius: 4.5, data: fwdWd6Balance },
+        { color: '#1d8cb8', strokeWidth: 3.5, radius: 4.5, data: chubbWd6Balance }
+      ], 380000);
+
+      // 4. 提領 9% SVG 圖表
+      renderSvgLineChart('svg-wd11-chart', ['第10年','第15年','第20年','第25年','第30年','第40年','第50年'], [
+        { color: '#f75f54', strokeWidth: 3.5, radius: 4.5, data: [79285, 85644, 106455, 125813, 141629, 192988, 289395] },
+        { color: '#1d8cb8', strokeWidth: 3.5, radius: 4.5, data: [76133, 73944, 87188, 95120, 106221, 127652, 167686] }
+      ], 320000);
+
+      // 5. 提領 18% SVG 圖表
+      renderSvgLineChart('svg-wd21-chart', ['第20年','第25年','第30年','第35年','第40年','第50年'], [
+        { color: '#f75f54', strokeWidth: 3.5, radius: 4.5, data: [171837, 194905, 205546, 220125, 240099, 304959] },
+        { color: '#1d8cb8', strokeWidth: 3.5, radius: 4.5, data: [167760, 180673, 198637, 211592, 229213, 286174] }
+      ], 330000);
+    }
+
+    // 頁面加載完成後自動渲染
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAllCharts();
+      updateCardTexts();
+    });
+  </script>
+
+</body>
+</html>
