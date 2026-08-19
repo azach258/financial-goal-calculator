@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>富衛人壽 vs 安達人壽 頂級分紅保單精算對比 (v2.1.0 旗艦版)</title>
+  <title>富衛人壽 vs 安達人壽 頂級分紅保單精算對比 (v2.1.1 旗艦版)</title>
   
   <style>
     /* ===================================================
@@ -53,7 +53,7 @@
       padding-bottom: 90px;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
-      word-break: break-word;
+      overflow-x: hidden;
     }
 
     @media (min-width: 768px) {
@@ -72,7 +72,7 @@
     }
 
     /* ===================================================
-       2. 韓系卡片與結構排版 (防孤字換行)
+       2. 韓系卡片與結構排版
     =================================================== */
     .korean-card {
       background: var(--card-bg);
@@ -100,7 +100,7 @@
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     @media (min-width: 768px) {
       .grid-2 {
@@ -148,9 +148,9 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      padding-bottom: 18px;
+      padding-bottom: 16px;
       border-bottom: 2px solid var(--border-soft);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     @media (min-width: 1024px) {
       .header-top {
@@ -160,19 +160,32 @@
       }
     }
 
-    h1 {
+    .brand-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    @media (min-width: 768px) {
+      .brand-title-box {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-name {
       font-size: 20px;
       font-weight: 900;
       color: var(--text-main);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px 8px;
-      margin-top: 6px;
-      line-height: 1.3;
     }
     @media (min-width: 768px) {
-      h1 { font-size: 28px; }
+      .brand-name { font-size: 26px; }
     }
 
     .pill-tag {
@@ -182,9 +195,6 @@
       padding: 3px 10px;
       border-radius: 9999px;
       white-space: nowrap;
-    }
-    @media (min-width: 768px) {
-      .pill-tag { font-size: 13px; padding: 3px 12px; }
     }
 
     /* 幣別切換按鈕 */
@@ -229,7 +239,7 @@
       background: #ffffff;
       border: 1.5px solid var(--border-soft);
       border-radius: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       -webkit-overflow-scrolling: touch;
     }
     .nav-tabs::-webkit-scrollbar { display: none; }
@@ -398,24 +408,28 @@
             <span class="badge badge-gold">👑 VIP 私人財富管理精算提案</span>
             <span class="badge badge-green">🎁 含 10% 保費折扣雙精算</span>
             <span class="badge" style="background:#ffffff; color:var(--text-muted); border:1.5px solid var(--border-soft);">🌸 匯率 1 USD ≈ 32 TWD</span>
-            <span class="badge" style="background:#f2e4dc; color:var(--text-main); border:1px solid var(--border-soft);">🏷️ v2.1.0 (2026-08-19)</span>
+            <span class="badge" style="background:#f2e4dc; color:var(--text-main); border:1px solid var(--border-soft);">🏷️ v2.1.1 (2026-08-19)</span>
           </div>
 
-          <h1>
-            <span class="nowrap">富衛人壽</span>
-            <span class="pill-tag" style="background:var(--color-fwd);">FWD 盈聚・天下 II</span>
-            <span style="color:var(--text-light); font-weight:normal; margin:0 2px;">×</span>
-            <span class="nowrap">安達人壽</span>
-            <span class="pill-tag" style="background:var(--color-chubb);">CHUBB 傳承守創 V</span>
-          </h1>
+          <div class="brand-title-box">
+            <div class="brand-group">
+              <span class="brand-name">富衛人壽</span>
+              <span class="pill-tag" style="background:var(--color-fwd);">FWD 盈聚・天下 II</span>
+            </div>
+            <span style="color:var(--text-light); font-weight:bold; margin:0 2px;">×</span>
+            <div class="brand-group">
+              <span class="brand-name">安達人壽</span>
+              <span class="pill-tag" style="background:var(--color-chubb);">CHUBB 傳承守創 V</span>
+            </div>
+          </div>
 
-          <p style="color:var(--text-muted); font-size:12.5px; font-weight:600; margin-top:6px; line-height:1.5;">
+          <p style="color:var(--text-muted); font-size:12.5px; font-weight:600; margin-top:8px; line-height:1.5;">
             🌸 <strong>精算模型</strong>：32歲女性 VIP | 5年完繳 | 
             富衛實繳 <strong style="color:var(--color-fwd);" id="header-fwd-premium">$60,000 USD</strong> (約 192 萬 NTD) vs 安達折扣雙方案
           </p>
         </div>
 
-        <div style="display:flex; align-items:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
           <div class="currency-switcher">
             <button id="btnUSD" class="cur-btn active" onclick="setCurrency('USD')">USD 美元</button>
             <button id="btnTWD" class="cur-btn" onclick="setCurrency('TWD')">TWD 台幣 (萬)</button>
@@ -429,7 +443,7 @@
           <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:11px; font-weight:700;">
             <span class="nowrap">模式 A: 省現金</span> <span>💰</span>
           </div>
-          <div id="kpi-a-val" style="font-size:clamp(16px, 3.8vw, 19px); font-weight:900; color:var(--color-green); margin:3px 0;" class="nowrap">現省 $6,000</div>
+          <div id="kpi-a-val" style="font-size:16px; font-weight:900; color:var(--color-green); margin:3px 0;" class="nowrap">現省 $6,000</div>
           <p id="kpi-a-desc" style="font-size:11px; color:var(--text-muted); font-weight:600; line-height:1.4;">實繳 $54,000，現省 <strong>$6,000 USD</strong> 留身邊。</p>
         </div>
 
@@ -437,7 +451,7 @@
           <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:11px; font-weight:700;">
             <span class="nowrap">模式 B: 放大保額</span> <span>🚀</span>
           </div>
-          <div id="kpi-b-val" style="font-size:clamp(15px, 3.6vw, 19px); font-weight:900; color:var(--color-chubb); margin:3px 0;" class="nowrap">規模放大 1.11 倍</div>
+          <div id="kpi-b-val" style="font-size:16px; font-weight:900; color:var(--color-chubb); margin:3px 0;" class="nowrap">規模放大 +11%</div>
           <p id="kpi-b-desc" style="font-size:11px; color:var(--text-muted); font-weight:600; line-height:1.4;">同繳 $60k，30年滾存達 <strong>$390,316</strong> (多賺 $39k)。</p>
         </div>
 
@@ -445,7 +459,7 @@
           <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:11px; font-weight:700;">
             <span class="nowrap">前期流動防禦</span> <span>🛡️</span>
           </div>
-          <div style="font-size:clamp(15px, 3.6vw, 19px); font-weight:900; color:var(--color-fwd); margin:3px 0;" class="nowrap">富衛 FWD 領先</div>
+          <div style="font-size:16px; font-weight:900; color:var(--color-fwd); margin:3px 0;" class="nowrap">富衛退保領先</div>
           <p id="kpi-fwd-desc" style="font-size:11px; color:var(--text-muted); font-weight:600; line-height:1.4;">第5年退保達 59%，自帶 <strong>200% 意外身故保障</strong>。</p>
         </div>
 
@@ -453,7 +467,7 @@
           <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:11px; font-weight:700;">
             <span class="nowrap">30年純滾存</span> <span>📈</span>
           </div>
-          <div style="font-size:clamp(15px, 3.6vw, 19px); font-weight:900; color:var(--color-gold); margin:3px 0;" class="nowrap">5.85 ~ 6.5 倍</div>
+          <div style="font-size:16px; font-weight:900; color:var(--color-gold); margin:3px 0;" class="nowrap">30年 5.8~6.5倍</div>
           <p id="kpi-growth-desc" style="font-size:11px; color:var(--text-muted); font-weight:600; line-height:1.4;">投入 $60k，第30年本金增值至 <strong>$351k ~ $390k</strong>。</p>
         </div>
       </div>
@@ -482,7 +496,7 @@
             <span class="badge badge-green">模式 A：直接打 9 折 (省現金)</span>
             <span style="font-size:12px; font-weight:900; color:var(--color-green);" id="card-a-save">現省 $6,000 USD</span>
           </div>
-          <h3 style="font-size:16px; font-weight:900; color:var(--text-main); margin-bottom:6px;" id="card-a-title">名義 $12,000，實繳 $10,800/年</h3>
+          <h3 style="font-size:16px; font-weight:900; color:var(--text-main); margin-bottom:6px;" id="card-a-title">名義 $12,000 ‧ 實繳 $10,800/年</h3>
           <p style="font-size:12.5px; color:var(--text-muted); line-height:1.55;" id="card-a-desc">
             • <strong>訴求</strong>：少拿本金出門，把省下來的現金留在自己身邊。<br>
             • <strong>出資</strong>：5年總繳 <strong>$54,000 USD</strong> (約 172.8 萬台幣)。<br>
@@ -498,7 +512,7 @@
             <span class="badge badge-chubb">模式 B：實繳 1.2 萬放大保額</span>
             <span style="font-size:12px; font-weight:900; color:var(--color-chubb);" class="nowrap">等比放大 +11.11%</span>
           </div>
-          <h3 style="font-size:16px; font-weight:900; color:var(--text-main); margin-bottom:6px;" id="card-b-title">實繳 $12,000，名義保費 $13,333/年</h3>
+          <h3 style="font-size:16px; font-weight:900; color:var(--text-main); margin-bottom:6px;" id="card-b-title">實繳 $12,000 ‧ 名義 $13,333/年</h3>
           <p style="font-size:12.5px; color:var(--text-muted); line-height:1.55;" id="card-b-desc">
             • <strong>訴求</strong>：固定出資 $60,000 (192萬)，利用折扣槓桿把未來資產池放大。<br>
             • <strong>出資</strong>：5年總繳 <strong>$60,000 USD</strong> (與富衛出資 100% 相同)。<br>
@@ -756,7 +770,7 @@
     <footer class="version-footer">
       <div><strong>SC-ICG 私人財富管理精算中心</strong> ‧ 版權所有</div>
       <div style="margin-top:4px;">
-        目前版本：<span class="badge" style="background:#fff; border:1px solid #d4c5b9; color:#1f1610;">v2.1.0 (2026-08-19)</span> ‧ 
+        目前版本：<span class="badge" style="background:#fff; border:1px solid #d4c5b9; color:#1f1610;">v2.1.1 (2026-08-19)</span> ‧ 
         變更重點：消除孤字換行、全站動態幣別即時換算、支援全尺寸 RWD、免 404 智慧路由
       </div>
     </footer>
@@ -837,7 +851,7 @@
 
       // 3. 模式 A / B 卡片
       document.getElementById('card-a-save').innerText = isTWD ? '現省 19.2 萬 NTD' : '現省 $6,000 USD';
-      document.getElementById('card-a-title').innerText = isTWD ? '名義 38.4 萬，實繳 34.56 萬/年' : '名義 $12,000，實繳 $10,800/年';
+      document.getElementById('card-a-title').innerText = isTWD ? '名義 38.4 萬 ‧ 實繳 34.56 萬/年' : '名義 $12,000 ‧ 實繳 $10,800/年';
       document.getElementById('card-a-desc').innerHTML = isTWD
         ? '• <strong>訴求</strong>：少拿本金出門，把省下來的 19.2 萬台幣留身邊。<br>• <strong>出資</strong>：5年總繳 <strong>172.8 萬 NTD</strong> (原192萬)。<br>• <strong>利益</strong>：享 192 萬規模完整分紅，<strong>30年實質 ROI 高達 650.5%</strong>！'
         : '• <strong>訴求</strong>：少拿本金出門，把省下來的現金留在自己身邊。<br>• <strong>出資</strong>：5年總繳 <strong>$54,000 USD</strong> (約 172.8 萬台幣)。<br>• <strong>利益</strong>：享 $60k 規模完整分紅，<strong>30年實質 ROI 高達 650.5%</strong>！';
@@ -845,7 +859,7 @@
         ? '💰 30年退保值 1,124.1 萬 ÷ 實繳 172.8 萬 = <strong>實質 ROI 650.5% (淨賺 951.3 萬 NTD)</strong>'
         : '💰 30年退保值 $351,284 ÷ 實繳 $54,000 = <strong>實質 ROI 650.5% (淨賺 $29.7 萬美元)</strong>';
 
-      document.getElementById('card-b-title').innerText = isTWD ? '實繳 38.4 萬，名義保費 42.67 萬/年' : '實繳 $12,000，名義保費 $13,333/年';
+      document.getElementById('card-b-title').innerText = isTWD ? '實繳 38.4 萬 ‧ 名義 42.67 萬/年' : '實繳 $12,000 ‧ 名義 $13,333/年';
       document.getElementById('card-b-desc').innerHTML = isTWD
         ? '• <strong>訴求</strong>：固定出資 192 萬 ($60k)，利用折扣槓桿把未來資產池放大。<br>• <strong>出資</strong>：5年總繳 <strong>192 萬 NTD</strong> (與富衛出資 100% 相同)。<br>• <strong>利益</strong>：名義規模擴至 <strong>213.3 萬 NTD</strong>，全期分紅與提領<strong>全面放大 1.111 倍</strong>！'
         : '• <strong>訴求</strong>：固定出資 $60,000 (192萬)，利用折扣槓桿把未來資產池放大。<br>• <strong>出資</strong>：5年總繳 <strong>$60,000 USD</strong> (與富衛出資 100% 相同)。<br>• <strong>利益</strong>：名義規模擴大至 <strong>$66,667 USD</strong>，全期分紅與提領<strong>全面放大 1.111 倍</strong>！';
@@ -942,7 +956,6 @@
 
       let html = '';
 
-      // 背景水平網格線
       const gridCount = 4;
       for (let i = 0; i <= gridCount; i++) {
         const y = padT + (chartH / gridCount) * i;
@@ -955,14 +968,12 @@
         html += `<text x="${padL - 10}" y="${y + 4}" font-size="11" font-weight="700" fill="#8c776b" text-anchor="end">${labelText}</text>`;
       }
 
-      // X 軸標籤
       const stepX = chartW / (xLabels.length - 1);
       xLabels.forEach((lbl, idx) => {
         const x = padL + idx * stepX;
         html += `<text x="${x}" y="${height - 12}" font-size="11" font-weight="700" fill="#59483e" text-anchor="middle">${lbl}</text>`;
       });
 
-      // 繪製各條數據折線
       datasets.forEach(ds => {
         let points = [];
         ds.data.forEach((val, idx) => {
