@@ -242,8 +242,31 @@ export default function App() {
           </div>
         </div>
 
-        {/* Right Action Bar (Theme + CRM Admin Button) */}
+        {/* Right Action Bar (Theme + Comparison Link + CRM Admin Button) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          
+          {/* Comparison Page Link Button */}
+          <a 
+            href="./comparison.html"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              backgroundColor: '#fff0ec',
+              border: '1.5px solid #ffcec4',
+              color: '#f75f54',
+              padding: '6px 14px',
+              borderRadius: '999px',
+              fontSize: '0.8rem',
+              fontWeight: '800',
+              textDecoration: 'none',
+              transition: 'all 0.2s',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            🌸 富衛 vs 安達精算對比
+          </a>
+
           {/* Dynamic Theme Color Selector */}
           <div className="header-theme-selector" style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--bg-soft-primary)', padding: '6px 12px', borderRadius: '999px', border: '1px solid var(--border-primary)' }}>
             <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
